@@ -9,7 +9,5 @@ export class QuizQuestionComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  ngOnInit(){ }
 }

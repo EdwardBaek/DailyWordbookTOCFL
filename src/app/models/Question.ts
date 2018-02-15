@@ -1,9 +1,9 @@
-import { Word } from '../models/word';
-import { Answer } from '../models/answer';
+import { Word } from '../models/Word';
+import { Answer } from '../models/Answer';
 export interface Question {
     index: number;
-    word: Word;
+    word: string;
     sound?: string;
-    correctAnswerIndex: number;
-    answers: Answer[];
+    correctAnswerIndex?: number;
+    answers: Word[];
 }

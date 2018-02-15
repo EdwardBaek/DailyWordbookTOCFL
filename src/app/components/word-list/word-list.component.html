@@ -4,3 +4,25 @@
 <p>
   <a routerLink="/">Go to Main</a>
 </p>
+
+<button (click)="test(1)">Test level1</button>
+<button (click)="test(2)">Test level2</button>
+<button (click)="test(3)">Test level3</button>
+<button (click)="test(4)">Test level4</button>
+<button (click)="test(5)">Test level5</button>
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+        <td></td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody *ngFor="let word of words">
+    <tr>
+      <td><h3>{{ word.word }}</h3></td>
+      <td>{{ word.sound }}</td>
+      <td>{{ word.explain }}</td>
+    </tr>
+  </tbody>
+</table>
