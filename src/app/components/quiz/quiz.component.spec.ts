@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { QuizComponent } from './quiz.component';
+
+import { RouterTestingModule } from '@angular/router/testing'
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('QuizComponent', () => {
   let component: QuizComponent;
@@ -8,9 +10,10 @@ describe('QuizComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QuizComponent ]
-    })
-    .compileComponents();
+      declarations: [QuizComponent],
+      imports: [RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
