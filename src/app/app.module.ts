@@ -22,6 +22,7 @@ import { QuizService } from './services/quiz.service';
 // Routing
 import { AppRoutingModule } from './app-routing.module';
 import { QuizQuestionComponent } from './components/quiz-question/quiz-question.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { QuizQuestionComponent } from './components/quiz-question/quiz-question.
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [WordDataService, QuizService],
   bootstrap: [AppComponent]

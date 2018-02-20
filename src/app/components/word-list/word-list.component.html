@@ -1,28 +1,177 @@
 <p>
   word-list works!
 </p>
-<p>
-  <a routerLink="/">Go to Main</a>
-</p>
+<hr>
+<h2>Test Section</h2>
+<section>
+  <div class="card mb-2">
+    <div class="card-header"></div>
+    <div class="card-body">
+      <p>
+        <a routerLink="/">Go to Main</a>
+      </p>
+      <p>Selected Level : {{ selectedLevel }}</p>
+      <div class="form-group">
+        <input 
+        type="radio"
+        #level1
+        name="selectedLevel" 
+        [checked]="selectedLevel == 1" 
+        [value]="1" 
+        (change)="setLevel(1)"
+        > 
+        <label>Word Level : 1</label>
+      </div>
+      <div class="form-group">
+        <input 
+        type="radio"
+        #level2
+        name="selectedLevel" 
+        [checked]="selectedLevel == 2" 
+        [value]="2" 
+        (change)="setLevel(2)"
+        > 
+        <label>Word Level : 2</label>
+      </div>
+      <div class="form-group">
+        <input 
+        type="radio"
+        #level3
+        name="selectedLevel" 
+        [checked]="selectedLevel == 3" 
+        [value]="3" 
+        (change)="setLevel(3)"
+        > 
+        <label>Word Level : 3</label>
+      </div>
+      <div class="form-group">
+        <input 
+        type="radio"
+        #level4
+        name="selectedLevel" 
+        [checked]="selectedLevel == 4" 
+        [value]="4" 
+        (change)="setLevel(4)"
+        > 
+        <label>Word Level : 4</label>
+      </div>
+      <div class="form-group">
+        <input 
+        type="radio"
+        #level5
+        name="selectedLevel" 
+        [checked]="selectedLevel == 5" 
+        [value]="5" 
+        (change)="setLevel(5)"
+        > 
+        <label>Word Level : 5</label>
+      </div>
+      <p>
+        <button (click)="loadWordData()" class="btn btn-primary">Load Level {{selectedLevel}} Word Data</button>
+      </p>
+    </div>
+  </div>
+</section>
+<div class="card mb-2">
+  <div class="card-header">
+    Radio Test
+  </div>
+  <div class="card-body">
+    <label>This rule is true if: {{ mode }}</label>
+    <label class="form-check-inline">
+        <input class="form-check-input" 
+          type="radio" 
+          name="mode" 
+          [value]="true" 
+          [(ngModel)]="mode"
+        >
+    </label>
+    <label class="form-check-inline">
+        <input class="form-check-input" 
+          type="radio" 
+          name="mode" 
+          [value]="false" 
+          [(ngModel)]="mode"
+        >
+    </label>
+  </div>
+</div>
 
-<button (click)="test(1)">Test level1</button>
-<button (click)="test(2)">Test level2</button>
-<button (click)="test(3)">Test level3</button>
-<button (click)="test(4)">Test level4</button>
-<button (click)="test(5)">Test level5</button>
-  <table>
-    <thead>
-      <tr>
-        <td></td>
-        <td></td>
-      <td></td>
-    </tr>
-  </thead>
-  <tbody *ngFor="let word of words">
-    <tr>
-      <td><h3>{{ word.word }}</h3></td>
-      <td>{{ word.sound }}</td>
-      <td>{{ word.explain }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="card mb-2">
+  <div class="card-header">
+    Edit Settings
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label>Flip Card Type</label>
+      <input 
+        type="checkbox" 
+        name="radioValue" 
+        [checked]="radioValue" 
+        (change)="radioValue = !radioValue"
+      >
+    </div>
+    <div class="form-group">
+      <label>Card Type: </label>
+      <div *ngFor="let cardType of wordCardTypes">
+        <input 
+          type="radio" 
+          name="selectedWordCardType" 
+          [checked]="cardType.index === selectedWordCardType" 
+          [value]="cardType.index" 
+          (change)="setWordCardType(cardType.index)"
+        > {{ cardType.value }}
+      </div>
+    </div>
+  </div>
+  <p>selectedWordCardType : {{ selectedWordCardType }}</p>
+</div>
+
+
+  
+<hr>
+<h2>Word List Section</h2>
+<div *ngIf="words.length > 0">
+  <h3> Level {{ selectedLevel }}</h3>
+  <!-- Start Word Card - fllip type -->
+  <div *ngIf="isFlipCardType()">
+    <div class="card-wrapper mb-2 card-word effect-flip" *ngFor="let word of words">
+      <div class="flip-area text-center" (click)="word.flipped=!word.flipped" [class.flipped]="word.flipped">
+        <div class="card face-front">
+          <div class="card-content vertical-align-middle">
+            <h1 class="card-title">{{ word.word }}</h1>
+            <h6 class="card-subtitle">[ {{ word.sound }} ]</h6>
+          </div>
+        </div>
+        <div class="card face-back bg-light">
+          <div class="card-content vertical-align-middle">
+            <p class="card-text"><span *ngIf="word.class">{{ word.class }}</span>  {{ word.explain }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Word Card - fllip type -->
+  <!-- Start Simple Word Card -->
+  <div *ngIf="isSimpleCardType()">
+    <div class="card-wrapper mb-2 card-word" *ngFor="let word of words">
+      <div class="card text-center">
+        <div class="card-body">
+          <h1 class="card-title">{{ word.word }}</h1>
+          <h6 class="card-subtitle">[ {{ word.sound }} ]</h6>
+          <hr>
+          <p class="card-text"><span *ngIf="word.class">{{ word.class }}</span>  {{ word.explain }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End - Simple Word Card -->
+</div>
+
+<!-- Data loading Exception -->
+<div *ngIf="isLoadingData">
+  <h5>Now loading Data...</h5>
+</div>
+<div *ngIf="!isLoadingData && words.length == 0">
+  <h5>No Data</h5>
+</div>

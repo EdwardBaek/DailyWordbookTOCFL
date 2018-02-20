@@ -18,12 +18,14 @@ export class WordDataService {
     level4: [],
     level5: []
   };
+  selectedLevel: number = 1;
 
   constructor(private http: HttpClient) { }
 
   async getWordList(level: number){
     let wordList = this.getWordDataByLevel(level);
-
+    this.selectedLevel = level;
+    
     if(wordList && wordList.length > 0) {
       console.log('>>>Data from memory');
       return wordList;
