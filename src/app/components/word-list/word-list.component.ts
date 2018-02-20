@@ -45,6 +45,8 @@ export class WordListComponent implements OnInit {
     let words = await this.wordDataService.getWordList(level);
     this.words = words;
     this.isLoadingData = false;
+
+    console.log(this.words)
   }
 
   resetWordsData() {

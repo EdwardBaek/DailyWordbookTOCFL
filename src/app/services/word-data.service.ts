@@ -18,6 +18,7 @@ export class WordDataService {
     level4: [],
     level5: []
   };
+  wordDataVersion: string;
   selectedLevel: number = 1;
 
   constructor(private http: HttpClient) { }
@@ -31,10 +32,17 @@ export class WordDataService {
       return wordList;
     }
 
+    wordList = this.getWordDataFromLocalStorage(level);
+    if(wordList && wordList.length > 0) {
+      console.log('>>>Data from localStorage');
+      return wordList;
+    }
+    
     // let responsedData = await this.getWordDataFromNetwork(level);
     let responsedData = await this.getWordDataFromNetworkSlowly(level);
-
+    
     this.setWordDataByLevel(level, responsedData.data);
+    this.setWordDataToLocalStorage(level, responsedData.data);
 
     return responsedData.data;
   }
@@ -69,6 +77,19 @@ export class WordDataService {
     await new Promise<any[]>(resolve =>
       setTimeout(resolve, 2000));
     return await this.getWordDataFromNetwork(level);
+  }
+
+  getWordDataFromLocalStorage(level: number): any[] {
+    console.log('>>>try load data from localStorage');
+    let data = JSON.parse(localStorage.getItem('wordDataLevel'+level));
+    if(data != null) {
+      this.setWordDataByLevel(level, data);
+      return data;
+    }
+    return [];
+  }
+  setWordDataToLocalStorage(level: number, data: any[]) {
+    localStorage.setItem('wordDataLevel'+level, JSON.stringify(data));
   }
 
   /**
