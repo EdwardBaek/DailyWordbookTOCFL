@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 import { WordDataService } from '../../services/word-data.service';
 
@@ -10,8 +10,11 @@ import { Word } from '../../models/Word';
   styleUrls: ['./word-list.component.css']
 })
 export class WordListComponent implements OnInit {
+  wordsRaw: Word[] = [];
+  // For display
   words: Word[] = [];
   isLoadingData: boolean = false;
+  isLoadedData: boolean = false;
   radioValue: boolean = false;
   selectedLevel: number = 2;
   selectedWordCardType: number = 0;
@@ -42,13 +45,21 @@ export class WordListComponent implements OnInit {
   }
 
   async test(level: number) {
+    if(this.isLoadedData) return;
     this.resetWordsData();
     this.isLoadingData = true;
-    this.words = await this.wordDataService.getWordList(level);
-
+    this.wordsRaw = await this.wordDataService.getWordList(level);
     this.isLoadingData = false;
+    this.isLoadedData = true;
+    this.displayWordsByLimit();    
+  }
 
-    console.log(this.words)
+  displayWordsByLimit() {
+    let limitCount = this.loadItemCount;
+    if(this.wordsRaw.length < limitCount) limitCount = this.wordsRaw.length;
+    let tempArrayData = this.wordsRaw.splice(0, limitCount);
+    this.words = this.words.concat(tempArrayData);
+    console.log('displayWordsByLimit', `display ${limitCount} items from raw data`);
   }
 
   resetWordsData() {
@@ -77,5 +88,11 @@ export class WordListComponent implements OnInit {
   isSimpleCardType() {
     return (this.getWordCardType() == 'SimpleCard')
   }
-
+  
+  @HostListener('window:scroll', ['$event']) 
+  doSomething(event) {
+    // console.debug("Scroll Event", document.body.scrollTop);
+    if( this.isLoadedData && ( window.pageYOffset + 1000 ) > ( document.documentElement.offsetHeight - window.innerHeight ) )
+      this.displayWordsByLimit();
+  }
 }
