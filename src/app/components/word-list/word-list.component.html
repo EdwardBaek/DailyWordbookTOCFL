@@ -138,6 +138,7 @@
     <div class="card-wrapper mb-2 card-word effect-flip" *ngFor="let word of words">
       <div class="flip-area text-center" (click)="word.flipped=!word.flipped" [class.flipped]="word.flipped">
         <div class="card face-front">
+          <span class="badge badge-left-top badge-light">{{ word.index }}</span>
           <div class="card-content vertical-align-middle">
             <h1 class="card-title">{{ word.word }}</h1>
             <h6 class="card-subtitle">[ {{ word.sound }} ]</h6>
@@ -156,6 +157,7 @@
   <div *ngIf="isSimpleCardType()">
     <div class="card-wrapper mb-2 card-word" *ngFor="let word of words">
       <div class="card text-center">
+        <span class="badge badge-left-top badge-light">{{ word.index }}</span>
         <div class="card-body">
           <h1 class="card-title">{{ word.word }}</h1>
           <h6 class="card-subtitle">[ {{ word.sound }} ]</h6>

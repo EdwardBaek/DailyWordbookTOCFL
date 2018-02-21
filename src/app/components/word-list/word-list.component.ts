@@ -26,6 +26,8 @@ export class WordListComponent implements OnInit {
     }
   ];
 
+  loadItemCount: number = 100;
+
   constructor(private wordDataService: WordDataService) { }
 
   ngOnInit(){
@@ -42,8 +44,8 @@ export class WordListComponent implements OnInit {
   async test(level: number) {
     this.resetWordsData();
     this.isLoadingData = true;
-    let words = await this.wordDataService.getWordList(level);
-    this.words = words;
+    this.words = await this.wordDataService.getWordList(level);
+
     this.isLoadingData = false;
 
     console.log(this.words)

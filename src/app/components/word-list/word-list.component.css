@@ -38,4 +38,10 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
+.badge-left-top {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+}
 /* End Flip Card with Bootstrap */

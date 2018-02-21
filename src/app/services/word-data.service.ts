@@ -27,19 +27,20 @@ export class WordDataService {
     let wordList = this.getWordDataByLevel(level);
     this.selectedLevel = level;
     
+    console.log('>>>try load data from memory');
     if(wordList && wordList.length > 0) {
-      console.log('>>>Data from memory');
+      console.log('>>>Data from memory', wordList);
       return wordList;
     }
 
     wordList = this.getWordDataFromLocalStorage(level);
     if(wordList && wordList.length > 0) {
-      console.log('>>>Data from localStorage');
+      console.log('>>>Data from localStorage', wordList);
       return wordList;
     }
     
-    // let responsedData = await this.getWordDataFromNetwork(level);
-    let responsedData = await this.getWordDataFromNetworkSlowly(level);
+    let responsedData = await this.getWordDataFromNetwork(level);
+    // let responsedData = await this.getWordDataFromNetworkSlowly(level);
     
     this.setWordDataByLevel(level, responsedData.data);
     this.setWordDataToLocalStorage(level, responsedData.data);
