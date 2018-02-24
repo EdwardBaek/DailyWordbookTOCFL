@@ -1,3 +1,28 @@
-<p>
-  navbar works!
-</p>
+<nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+  <div class="container">
+    <a routerLink="/" class="navbar-brand">Daily WordBook</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a routerLink="/" class="nav-link">Home</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a routerLink="/words" class="nav-link">WORD</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/quiz/new" class="nav-link">QIUZ</a>
+        </li>
+        <li class="nav-item" *ngIf="isLogin">
+          <a routerLink="/settings" class="nav-link"><i class="fa fa-user"></i> {{ userName }}</a>
+        <li class="nav-item" *ngIf="!isLogin">
+          <a routerLink="/settings" class="nav-link"><i class="fa fa-user"></i> LOGIN</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

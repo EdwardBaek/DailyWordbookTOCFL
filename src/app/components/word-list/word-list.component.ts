@@ -82,10 +82,10 @@ export class WordListComponent implements OnInit {
     console.log( 'index', index );
     console.log( 'this.getWordCardType()',this.getWordCardType() );
   }
-  isFlipCardType() {
+  private isFlipCardType() {
     return (this.getWordCardType() == 'FlipCard')
   }
-  isSimpleCardType() {
+  private isSimpleCardType() {
     return (this.getWordCardType() == 'SimpleCard')
   }
   

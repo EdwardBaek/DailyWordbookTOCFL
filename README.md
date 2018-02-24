@@ -18,4 +18,4 @@ My Wordbook and Quiz to Memorize words for TOCFL
 - Now this is under developing, please refer [Wiki](https://github.com/EdwardBaek/-DailyWordbookTOCFL/wiki) and other pages in this gitgub. Thank you!
 
 ## Demo
-[Demo Link](https://dailywordbook.firebaseapp.com/words)
+[Demo Link](https://dailywordbook.firebaseapp.com/)
