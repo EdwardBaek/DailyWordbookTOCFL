@@ -1,3 +1,97 @@
-<p>
-  setting works!
-</p>
+<section>
+  <div class="card mb-2">
+    <div class="card-header">Card Setting</div>
+    <div class="card-body">
+      <!-- Start Select Level -->
+      <div class="form-group mb-2">
+        <label>Select Level</label>
+        <div class="btn-group btn-custom-radio-hidden form-control-plaintext">
+          <label class="btn btn-outline-primary" [class.active]="selectedLevel == 1">
+            <input 
+              type="radio"
+              #level1
+              name="selectedLevel" 
+              [checked]="selectedLevel == 1" 
+              [value]="1" 
+              (change)="setLevel(1)"
+            > 
+            1 
+          </label>
+          <label class="btn btn-outline-primary" [class.active]="selectedLevel == 2">
+            <input 
+              type="radio"
+              #level2
+              name="selectedLevel" 
+              [checked]="selectedLevel == 2" 
+              [value]="2" 
+              (change)="setLevel(2)"
+            > 
+            2 
+          </label>
+          <label class="btn btn-outline-primary" [class.active]="selectedLevel == 3">
+            <input 
+            type="radio"
+            #level3
+            name="selectedLevel" 
+            [checked]="selectedLevel == 3" 
+            [value]="3" 
+            (change)="setLevel(3)"
+            > 
+            3 
+          </label>
+          <label class="btn btn-outline-primary" [class.active]="selectedLevel == 4">
+            <input 
+            type="radio"
+            #level4
+            name="selectedLevel" 
+            [checked]="selectedLevel == 4" 
+            [value]="4" 
+            (change)="setLevel(4)"
+            > 
+            4 
+          </label>
+          <label class="btn btn-outline-primary" [class.active]="selectedLevel == 5">
+            <input 
+            type="radio"
+            #level5
+            name="selectedLevel" 
+            [checked]="selectedLevel == 5" 
+            [value]="5" 
+            (change)="setLevel(5)"
+            > 
+            5 
+          </label>
+        </div>
+      </div>
+      <!-- End Select Level -->
+      <!-- Start Select Card Type -->
+      <div class="form-group mb-2">
+        <label>Select Card Type</label>
+        <div class="btn-group btn-custom-radio-hidden form-control-plaintext">
+          <label class="btn btn-outline-primary" [class.active]="selectedWordCardType == 0">
+            <input 
+              type="radio"
+              name="selectedWordCardType" 
+              [checked]="selectedWordCardType == 0" 
+              [value]="0" 
+              (change)="setWordCardType(0)"
+            > 
+            Simple
+          </label>
+          <label class="btn btn-outline-primary" [class.active]="selectedWordCardType == 1">
+            <input 
+              type="radio"
+              
+              name="selectedWordCardType" 
+              [checked]="selectedWordCardType == 1" 
+              [value]="1" 
+              (change)="setWordCardType(1)"
+            > 
+            Flip
+          </label>
+        </div>
+      </div>
+      <!-- Start Select Card Type -->
+    </div>
+  </div>
+</section>

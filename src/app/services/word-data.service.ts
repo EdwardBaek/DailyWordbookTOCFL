@@ -30,13 +30,13 @@ export class WordDataService {
     console.log('>>>try load data from memory');
     if(wordList && wordList.length > 0) {
       console.log('>>>Data from memory', wordList);
-      return wordList;
+      return this.returnNewArray(wordList);
     }
 
     wordList = this.getWordDataFromLocalStorage(level);
     if(wordList && wordList.length > 0) {
       console.log('>>>Data from localStorage', wordList);
-      return wordList;
+      return this.returnNewArray(wordList);
     }
     
     let responsedData = await this.getWordDataFromNetwork(level);
@@ -45,9 +45,12 @@ export class WordDataService {
     this.setWordDataByLevel(level, responsedData.data);
     this.setWordDataToLocalStorage(level, responsedData.data);
 
-    return responsedData.data;
+    return this.returnNewArray(responsedData.data);
   }
 
+  private returnNewArray(array): any[] {
+    return array.slice();
+  }
   private getWordListDataUrlByLevel(level:number): string {
     if(!level) level = 1;
     return 'assets/data/level' + level + '.json';

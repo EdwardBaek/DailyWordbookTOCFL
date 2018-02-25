@@ -3,6 +3,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { WordDataService } from '../../services/word-data.service';
 
 import { Word } from '../../models/Word';
+import { SettingService } from '../../services/setting.service';
 
 @Component({
   selector: 'app-word-list',
@@ -13,10 +14,10 @@ export class WordListComponent implements OnInit {
   wordsRaw: Word[] = [];
   // For display
   words: Word[] = [];
+
   isLoadingData: boolean = false;
   isLoadedData: boolean = false;
-  radioValue: boolean = false;
-  selectedLevel: number = 2;
+  selectedLevel: number;
   selectedWordCardType: number = 0;
   wordCardTypes = [
     {
@@ -31,13 +32,17 @@ export class WordListComponent implements OnInit {
 
   loadItemCount: number = 100;
 
-  constructor(private wordDataService: WordDataService) { }
+  constructor(
+    private wordDataService: WordDataService,
+    private settingService: SettingService
+  ) { }
 
   ngOnInit(){
-  }
-
-  setLevel(level) {
-    this.selectedLevel = level;
+    console.log('ngOnInit');
+    console.log('ngOninit-isLoadedData:', this.isLoadedData);
+    this.selectedLevel = this.settingService.getLevel();
+    this.setWordCardType(this.settingService.getWordCardType());
+    this.loadWordData();
   }
 
   async loadWordData() {
@@ -64,22 +69,19 @@ export class WordListComponent implements OnInit {
 
   resetWordsData() {
     this.words = [];
+    this.wordsRaw = [];
   }
 
   log(data) {
     console.log(data);
   }
 
-  onRadioChange() {
-    this.radioValue = !this.radioValue;
-    console.log('this.radioValue',this.radioValue);
-  }
   getWordCardType() {
     return this.wordCardTypes[this.selectedWordCardType].value;
   }
   setWordCardType(index) {
     this.selectedWordCardType = index;
-    console.log( 'index', index );
+    console.log( 'setWordCardType index', index );
     console.log( 'this.getWordCardType()',this.getWordCardType() );
   }
   private isFlipCardType() {
