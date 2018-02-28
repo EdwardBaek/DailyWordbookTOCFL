@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingService } from '../../services/setting.service';
+import { Word } from '../../models/Word';
 
 @Component({
   selector: 'app-setting',
@@ -9,7 +10,13 @@ import { SettingService } from '../../services/setting.service';
 export class SettingComponent implements OnInit {
   selectedLevel: number;
   selectedWordCardType: number;
-
+  sampleWord: Word = {
+    index : 1,
+    word : '單字',
+    sound : 'word sound',
+    explain : 'explan of the word',
+    class: '(class of word)',
+  }
   gender = 'male';
   constructor(private settingService: SettingService) { }
 

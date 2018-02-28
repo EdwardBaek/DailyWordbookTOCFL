@@ -3,7 +3,7 @@ export interface Word {
     word: string;
     sound?: string;
     class?: string;
-    exlain: string;
+    explain: string;
     tag?: string;
     group?: string;
     order?: number;

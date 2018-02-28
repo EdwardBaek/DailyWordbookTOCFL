@@ -22,5 +22,8 @@ export class WordCardComponent implements OnInit {
   private isFlipCardType() {
     return (this.cardType == 1)
   }
+  private isFlipCardType2() {
+    return (this.cardType == 2)
+  }
 
 }

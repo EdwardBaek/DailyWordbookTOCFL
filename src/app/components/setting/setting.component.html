@@ -89,9 +89,23 @@
             > 
             Flip
           </label>
+          <label class="btn btn-outline-primary" [class.active]="selectedWordCardType == 2">
+              <input 
+                type="radio"
+                
+                name="selectedWordCardType" 
+                [checked]="selectedWordCardType == 2" 
+                [value]="2" 
+                (change)="setWordCardType(2)"
+              > 
+              Flip 2
+            </label>
         </div>
       </div>
+      <!-- card sample -->
+      <app-word-card [word]="sampleWord" [cardType]="selectedWordCardType"></app-word-card>
       <!-- Start Select Card Type -->
     </div>
   </div>
 </section>
+<hr>

@@ -27,6 +27,10 @@ export class WordListComponent implements OnInit {
     {
       index: 1, 
       value: 'FlipCard'
+    },
+    {
+      index: 2, 
+      value: 'FlipCard2'
     }
   ];
 
