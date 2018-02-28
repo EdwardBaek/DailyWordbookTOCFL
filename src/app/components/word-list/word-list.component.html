@@ -1,41 +1,6 @@
-<h2>Word List Section</h2>
 <div *ngIf="words.length > 0">
   <h3> Level {{ selectedLevel }}</h3>
-  <!-- Start Word Card - fllip type -->
-  <div *ngIf="isFlipCardType()">
-    <div class="card-wrapper mb-2 card-word effect-flip" *ngFor="let word of words">
-      <div class="flip-area text-center" (click)="word.flipped=!word.flipped" [class.flipped]="word.flipped">
-        <div class="card face-front">
-          <span class="badge badge-left-top badge-light">{{ word.index }}</span>
-          <div class="card-content vertical-align-middle">
-            <h1 class="card-title">{{ word.word }}</h1>
-            <h6 class="card-subtitle">[ {{ word.sound }} ]</h6>
-          </div>
-        </div>
-        <div class="card face-back bg-light">
-          <div class="card-content vertical-align-middle">
-            <p class="card-text"><span *ngIf="word.class">{{ word.class }}</span>  {{ word.explain }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Word Card - fllip type -->
-  <!-- Start Simple Word Card -->
-  <div *ngIf="isSimpleCardType()">
-    <div class="card-wrapper mb-2 card-word" *ngFor="let word of words">
-      <div class="card text-center">
-        <span class="badge badge-left-top badge-light">{{ word.index }}</span>
-        <div class="card-body">
-          <h1 class="card-title">{{ word.word }}</h1>
-          <h6 class="card-subtitle">[ {{ word.sound }} ]</h6>
-          <hr>
-          <p class="card-text"><span *ngIf="word.class">{{ word.class }}</span>  {{ word.explain }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End - Simple Word Card -->
+  <app-word-card *ngFor="let word of words" [word]="word" [cardType]="selectedWordCardType"></app-word-card>
 </div>
 
 <!-- Data loading Exception -->

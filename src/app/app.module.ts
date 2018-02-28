@@ -24,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { QuizQuestionComponent } from './components/quiz-question/quiz-question.component';
 import { FormsModule } from '@angular/forms';
 import { SettingService } from './services/setting.service';
+import { WordCardComponent } from './components/word-card/word-card.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SettingService } from './services/setting.service';
     RecordListComponent,
     SettingComponent,
     NotFoundComponent,
-    QuizQuestionComponent
+    QuizQuestionComponent,
+    WordCardComponent
   ],
   imports: [
     BrowserModule,
