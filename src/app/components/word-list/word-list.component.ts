@@ -48,7 +48,12 @@ export class WordListComponent implements OnInit {
     this.setWordCardType(this.settingService.getWordCardType());
     this.loadWordData();
   }
-
+  
+  async reload() {
+    this.selectedLevel = this.settingService.getLevel();
+    this.setWordCardType(this.settingService.getWordCardType());
+    await this.test(this.selectedLevel);
+  }
   async loadWordData() {
     await this.test(this.selectedLevel);
   }

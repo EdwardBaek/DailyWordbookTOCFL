@@ -25,6 +25,10 @@ import { QuizQuestionComponent } from './components/quiz-question/quiz-question.
 import { FormsModule } from '@angular/forms';
 import { SettingService } from './services/setting.service';
 import { WordCardComponent } from './components/word-card/word-card.component';
+import { WordCardSettingComponent } from './components/word-card-setting/word-card-setting.component';
+
+// For Animation
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -39,10 +43,12 @@ import { WordCardComponent } from './components/word-card/word-card.component';
     SettingComponent,
     NotFoundComponent,
     QuizQuestionComponent,
-    WordCardComponent
+    WordCardComponent,
+    WordCardSettingComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule

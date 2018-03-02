@@ -17,9 +17,11 @@ export class SettingService {
   }
 
   getLevel() :number {
+    this.setting = JSON.parse(localStorage.getItem('setting'));
     return this.setting.level;
   }
   getWordCardType(): number {
+    this.setting = JSON.parse(localStorage.getItem('setting'));
     return this.setting.wordCardType;
   }
   setLevel(level: number) {

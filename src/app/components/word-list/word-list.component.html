@@ -1,3 +1,6 @@
+<app-word-card-setting></app-word-card-setting>
+<button class="btn btn-primary btn-block" (click)="reload()">Load Word Card</button>
+<hr>
 <div *ngIf="words.length > 0">
   <h3> Level {{ selectedLevel }}</h3>
   <app-word-card *ngFor="let word of words" [word]="word" [cardType]="selectedWordCardType"></app-word-card>
