@@ -11,29 +11,17 @@ import { SettingService } from '../../services/setting.service';
   styleUrls: ['./word-list.component.css']
 })
 export class WordListComponent implements OnInit {
+  // Data Management
   wordsRaw: Word[] = [];
-  // For display
-  words: Word[] = [];
-
   isLoadingData: boolean = false;
   isLoadedData: boolean = false;
+  
+  // Word Card Option
   selectedLevel: number;
   selectedWordCardType: number = 0;
-  wordCardTypes = [
-    {
-      index: 0, 
-      value: 'SimpleCard'
-    },
-    {
-      index: 1, 
-      value: 'FlipCard'
-    },
-    {
-      index: 2, 
-      value: 'FlipCard2'
-    }
-  ];
-
+  
+  // For display Word Cards
+  words: Word[] = [];
   loadItemCount: number = 100;
 
   constructor(
@@ -41,24 +29,24 @@ export class WordListComponent implements OnInit {
     private settingService: SettingService
   ) { }
 
-  ngOnInit(){
-    console.log('ngOnInit');
-    console.log('ngOninit-isLoadedData:', this.isLoadedData);
+  async ngOnInit(){
+    console.debug('ngOninit-isLoadedData:', this.isLoadedData);
     this.selectedLevel = this.settingService.getLevel();
-    this.setWordCardType(this.settingService.getWordCardType());
-    this.loadWordData();
+    await this.loadWordData(this.selectedLevel);
   }
   
   async reload() {
-    this.selectedLevel = this.settingService.getLevel();
-    this.setWordCardType(this.settingService.getWordCardType());
-    await this.test(this.selectedLevel);
-  }
-  async loadWordData() {
-    await this.test(this.selectedLevel);
+    this.selectedWordCardType = this.settingService.getWordCardType();
+    let selectedLevel = this.settingService.getLevel();
+    if( selectedLevel != this.selectedLevel ){
+      this.selectedLevel = selectedLevel;
+      console.debug('selected level is different, start loadWordData')
+      this.isLoadedData = false;
+      await this.loadWordData(this.selectedLevel);
+    }
   }
 
-  async test(level: number) {
+  private async loadWordData(level: number) {
     if(this.isLoadedData) return;
     this.resetWordsData();
     this.isLoadingData = true;
@@ -68,15 +56,15 @@ export class WordListComponent implements OnInit {
     this.displayWordsByLimit();    
   }
 
-  displayWordsByLimit() {
+  private displayWordsByLimit() {
     let limitCount = this.loadItemCount;
     if(this.wordsRaw.length < limitCount) limitCount = this.wordsRaw.length;
     let tempArrayData = this.wordsRaw.splice(0, limitCount);
     this.words = this.words.concat(tempArrayData);
-    console.log('displayWordsByLimit', `display ${limitCount} items from raw data`);
+    console.debug('displayWordsByLimit', `display ${limitCount} items from raw data`);
   }
 
-  resetWordsData() {
+  private resetWordsData() {
     this.words = [];
     this.wordsRaw = [];
   }
@@ -85,23 +73,8 @@ export class WordListComponent implements OnInit {
     console.log(data);
   }
 
-  getWordCardType() {
-    return this.wordCardTypes[this.selectedWordCardType].value;
-  }
-  setWordCardType(index) {
-    this.selectedWordCardType = index;
-    console.log( 'setWordCardType index', index );
-    console.log( 'this.getWordCardType()',this.getWordCardType() );
-  }
-  private isFlipCardType() {
-    return (this.getWordCardType() == 'FlipCard')
-  }
-  private isSimpleCardType() {
-    return (this.getWordCardType() == 'SimpleCard')
-  }
-  
   @HostListener('window:scroll', ['$event']) 
-  doSomething(event) {
+  private doSomething(event) {
     // console.debug("Scroll Event", document.body.scrollTop);
     if( this.isLoadedData && ( window.pageYOffset + 1000 ) > ( document.documentElement.offsetHeight - window.innerHeight ) )
       this.displayWordsByLimit();

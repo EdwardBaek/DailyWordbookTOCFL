@@ -8,33 +8,50 @@ export class SettingService {
     level: 1,
     wordCardType: 0
   }
+  localStorageName: string = 'setting';
 
   constructor() { 
-    let data = JSON.parse(localStorage.getItem('setting'));
+    let data = this.getSettingFromLocalStorage();
     if(data != null) {
       this.setting = data;
     }
   }
 
+  getSetting() : Setting {
+    this.loadSettingFromLocalStorage();
+    return this.setting;
+  }
   getLevel() :number {
-    this.setting = JSON.parse(localStorage.getItem('setting'));
+    this.loadSettingFromLocalStorage();
     return this.setting.level;
   }
   getWordCardType(): number {
-    this.setting = JSON.parse(localStorage.getItem('setting'));
+    this.setting = JSON.parse(localStorage.getItem(this.localStorageName));
     return this.setting.wordCardType;
+  }
+
+  setSetting(setting: Setting) {
+    this.setSettingToLocalStorage(setting);
   }
   setLevel(level: number) {
     this.setting.level = level;
-    localStorage.setItem('setting', JSON.stringify(this.setting));
+    localStorage.setItem(this.localStorageName, JSON.stringify(this.setting));
   }
   setWordCardType(wordCardType: number) {
     this.setting.wordCardType = wordCardType;
-    localStorage.setItem('setting', JSON.stringify(this.setting));
+    localStorage.setItem(this.localStorageName, JSON.stringify(this.setting));
   }
-  saveSetting(setting) {
+  
+  private loadSettingFromLocalStorage() {
+    this.setting = JSON.parse(localStorage.getItem(this.localStorageName));
+  }
+  private setSettingToLocalStorage(setting) {
     this.setting = setting;
-    localStorage.setItem('setting', JSON.stringify(this.setting));
+    localStorage.setItem(this.localStorageName, JSON.stringify(this.setting));
+  }
+  
+  getSettingFromLocalStorage() {
+    return JSON.parse(localStorage.getItem(this.localStorageName));
   }
 
 }
