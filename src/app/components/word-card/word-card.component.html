@@ -1,3 +1,4 @@
+<div (click)="onCardClick()">
 <!-- Start Simple Word Card -->
 <div *ngIf="selectedCardType == CARD_TYPE.SIMPLE && word">
   <div class="card-wrapper mb-2 card-word">
@@ -13,6 +14,25 @@
   </div>
 </div>
 <!-- End - Simple Word Card -->
+
+<!-- Start Show and Hide Word Card -->
+<div *ngIf="selectedCardType == CARD_TYPE.HIDE && word">
+    <div class="card-wrapper mb-2 card-word">
+      <div class="card text-center">
+        <span class="badge badge-left-top badge-light">{{ word.index }}</span>
+        <div class="card-body" >
+          <h1 class="card-title">{{ word.word }}</h1>
+          <div [@showAndHide]="cardClickState">
+            <h6 class="card-subtitle">[ {{ word.sound }} ]</h6>
+            <hr>
+            <p class="card-text"><span *ngIf="word.class">{{ word.class }}</span>  {{ word.explain }}</p>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Show and Hide Word Card -->
+</div>
 
 <!-- Start Word Card - fllip type -->
 <div *ngIf="selectedCardType == CARD_TYPE.FLIP && word">
@@ -57,3 +77,4 @@
   </div>
 </div>
 <!-- End Word Card - fllip type 2 -->
+

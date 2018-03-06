@@ -2,16 +2,32 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Word } from '../../models/Word';
 import { CARD_TYPE } from '../../models/Types';
 
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
+
 @Component({
   selector: 'app-word-card',
   templateUrl: './word-card.component.html',
-  styleUrls: ['./word-card.component.css']
+  styleUrls: ['./word-card.component.css'],
+  animations: [
+    trigger('showAndHide', [
+      state('unclicked', style({opacity: '0'})),
+      state('clicked', style({opacity: '*'})),
+      transition('clicked <=> unclicked', animate('0.5s ease-in-out')),
+    ]),
+  ]
 })
 
 export class WordCardComponent implements OnInit {
   @Input('word') word: Word;
   @Input('cardType') selectedCardType: number;
-  
+  cardClickState: string = 'unclicked';
+
   CARD_TYPE;
   
   constructor() { 
@@ -19,5 +35,9 @@ export class WordCardComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+  onCardClick() {
+    this.cardClickState = (this.cardClickState == 'clicked') ? 'unclicked' : 'clicked';
+    console.log('this.cardClickState',this.cardClickState);
   }
 }

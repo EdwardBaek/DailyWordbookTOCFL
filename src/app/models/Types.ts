@@ -1,12 +1,18 @@
 export enum CARD_TYPE {
   'SIMPLE',
+  'HIDE',
   'FLIP',
-  'FLIP2'
+  'FLIP2',
+  // For Test
+  // 'TEST',
 };
 export const CARD_TYPE_NAMES: any[] = [
   {id:CARD_TYPE.SIMPLE,  name:'Simple'},
+  {id:CARD_TYPE.HIDE,    name:'Hide'},
   {id:CARD_TYPE.FLIP,    name:'Flip'},
-  {id:CARD_TYPE.FLIP2,   name:'Flip2'}
+  {id:CARD_TYPE.FLIP2,   name:'Flip2'},
+  // For Test
+  // {id:CARD_TYPE.TEST,   name:'Test'},
 ];
 export enum LEVEL {
   'LEVEL_1',
