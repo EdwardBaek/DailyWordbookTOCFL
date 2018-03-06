@@ -32,6 +32,7 @@ export class SettingService {
 
   setSetting(setting: Setting) {
     this.setSettingToLocalStorage(setting);
+    this.setting = setting;
   }
   setLevel(level: number) {
     this.setting.level = level;

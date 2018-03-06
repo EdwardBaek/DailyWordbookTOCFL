@@ -29,6 +29,7 @@ import { WordCardSettingComponent } from './components/word-card-setting/word-ca
 
 // For Animation
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MockDataService } from './services/mock-data.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule
   ],
-  providers: [WordDataService, QuizService, SettingService],
+  providers: [WordDataService, QuizService, SettingService, MockDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

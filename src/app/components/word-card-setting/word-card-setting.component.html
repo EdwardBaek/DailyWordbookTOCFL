@@ -4,115 +4,46 @@
       Card Setting
       <i class="fa fa-angle-up" *ngIf="shrink == 'down'"></i>
       <i class="fa fa-angle-down" *ngIf="shrink == 'up'"></i>
-      <!-- <i class="fa fa-chevron-circle-up" *ngIf="!toggle"></i>
-      <i class="fa fa-chevron-circle-down" *ngIf="toggle"></i> -->
     </div>
     <div class="card-body animate" [@shrinkUpDown]="shrink">
       <!-- Start Select Level -->
       <div class="form-group mb-2">
-        <label>Select Level</label>
-        <div class="btn-group form-control-plaintext">
-          <label class="btn btn-outline-primary" [class.active]="selectedLevel == 1">
-            <input 
-              type="radio"
-              #level1
-              name="selectedLevel" 
-              [checked]="selectedLevel == 1" 
-              [value]="1" 
-              (change)="setLevel(1)"
-              hidden
-            > 
-            1 
-          </label>
-          <label class="btn btn-outline-primary" [class.active]="selectedLevel == 2">
-            <input 
-              type="radio"
-              #level2
-              name="selectedLevel" 
-              [checked]="selectedLevel == 2" 
-              [value]="2" 
-              (change)="setLevel(2)"
-              hidden
-            > 
-            2 
-          </label>
-          <label class="btn btn-outline-primary" [class.active]="selectedLevel == 3">
-            <input 
-            type="radio"
-            #level3
-            name="selectedLevel" 
-            [checked]="selectedLevel == 3" 
-            [value]="3" 
-            (change)="setLevel(3)"
-            hidden
-            > 
-            3 
-          </label>
-          <label class="btn btn-outline-primary" [class.active]="selectedLevel == 4">
-            <input 
-            type="radio"
-            #level4
-            name="selectedLevel" 
-            [checked]="selectedLevel == 4" 
-            [value]="4" 
-            (change)="setLevel(4)"
-            hidden
-            > 
-            4 
-          </label>
-          <label class="btn btn-outline-primary" [class.active]="selectedLevel == 5">
-            <input 
-            type="radio"
-            #level5
-            name="selectedLevel" 
-            [checked]="selectedLevel == 5" 
-            [value]="5" 
-            (change)="setLevel(5)"
-            hidden
-            > 
-            5 
-          </label>
-        </div>
+          <label>Select Level</label>
+          <div class="btn-group form-control-plaintext">
+            <ng-template ngFor let-level [ngForOf]="LEVELS">
+              <label class="btn btn-outline-primary" [class.active]="selectedLevel == level.id">
+                <input 
+                type="radio"
+                name="selectedLevel"
+                [checked]="selectedLevel == level.id" 
+                [value]="level.id" 
+                (change)="setLevel(level.id)"
+                hidden
+                > 
+                {{ level.value }} 
+              </label>
+            </ng-template>
+          </div>
       </div>
       <!-- End Select Level -->
       <!-- Start Select Card Type -->
       <div class="form-group mb-2">
         <label>Select Card Type</label>
         <div class="btn-group btn-custom-radio-hidden form-control-plaintext">
-          <label class="btn btn-outline-primary" [class.active]="selectedWordCardType == 0">
-            <input 
-              type="radio"
-              hidden
-              name="selectedWordCardType" 
-              [checked]="selectedWordCardType == 0" 
-              [value]="0" 
-              (change)="setWordCardType(0)"
-            > 
-            Simple
-          </label>
-          <label class="btn btn-outline-primary" [class.active]="selectedWordCardType == 1">
-            <input 
-              type="radio"
-              hidden
-              name="selectedWordCardType" 
-              [checked]="selectedWordCardType == 1" 
-              [value]="1" 
-              (change)="setWordCardType(1)"
-            > 
-            Flip
-          </label>
-          <label class="btn btn-outline-primary" [class.active]="selectedWordCardType == 2">
+          <ng-template ngFor let-type [ngForOf]="CARD_TYPE_NAMES">
+            <label class="btn btn-outline-primary" [class.active]="selectedWordCardType == type.id">
               <input 
-                type="radio"
-                hidden
-                name="selectedWordCardType" 
-                [checked]="selectedWordCardType == 2" 
-                [value]="2" 
-                (change)="setWordCardType(2)"
+              type="radio"
+              hidden
+              name="selectedWordCardType" 
+              [checked]="selectedWordCardType == type.id" 
+              [value]="type.id" 
+              (change)="setWordCardType(type.id)"
               > 
-              Flip 2
+              {{ type.name }}
             </label>
-        </div>
+          </ng-template>
+          </div>
       </div>
       <!-- card sample -->
       <app-word-card [word]="sampleWord" [cardType]="selectedWordCardType"></app-word-card>

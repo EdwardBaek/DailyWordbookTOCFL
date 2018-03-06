@@ -1,5 +1,5 @@
 <!-- Start Simple Word Card -->
-<div *ngIf="isSimpleCardType() && word">
+<div *ngIf="selectedCardType == CARD_TYPE.SIMPLE && word">
   <div class="card-wrapper mb-2 card-word">
     <div class="card text-center">
       <span class="badge badge-left-top badge-light">{{ word.index }}</span>
@@ -15,7 +15,7 @@
 <!-- End - Simple Word Card -->
 
 <!-- Start Word Card - fllip type -->
-<div *ngIf="isFlipCardType() && word">
+<div *ngIf="selectedCardType == CARD_TYPE.FLIP && word">
   <div class="card-wrapper mb-2 card-word effect-flip">
     <div class="flip-area text-center" (click)="word.flipped=!word.flipped" [class.flipped]="word.flipped">
       <div class="card face-front">
@@ -36,24 +36,24 @@
 <!-- End Word Card - fllip type -->
 
 <!-- Start Word Card - fllip type 2 -->
-<div *ngIf="isFlipCardType2() && word">
-    <div class="card-wrapper mb-2 card-word effect-flip">
-      <div class="flip-area text-center" (click)="word.flipped=!word.flipped" [class.flipped]="word.flipped">
-        <div class="card face-front">
-          <span class="badge badge-left-top badge-light">{{ word.index }}</span>
-          <div class="card-content vertical-align-middle">
-            <h1 class="card-title">{{ word.word }}</h1>
-          </div>
+<div *ngIf="selectedCardType == CARD_TYPE.FLIP2 && word">
+  <div class="card-wrapper mb-2 card-word effect-flip">
+    <div class="flip-area text-center" (click)="word.flipped=!word.flipped" [class.flipped]="word.flipped">
+      <div class="card face-front">
+        <span class="badge badge-left-top badge-light">{{ word.index }}</span>
+        <div class="card-content vertical-align-middle">
+          <h1 class="card-title">{{ word.word }}</h1>
         </div>
-        <div class="card face-back bg-light">
-          <div class="card-content vertical-align-middle">
-            <h1 class="card-title">{{ word.word }}</h1>
-            <h6 class="card-subtitle">[ {{ word.sound }} ]</h6>
-            <hr>
-            <p class="card-text"><span *ngIf="word.class">{{ word.class }}</span>  {{ word.explain }}</p>
-          </div>
+      </div>
+      <div class="card face-back bg-light">
+        <div class="card-content vertical-align-middle">
+          <h1 class="card-title">{{ word.word }}</h1>
+          <h6 class="card-subtitle">[ {{ word.sound }} ]</h6>
+          <hr>
+          <p class="card-text"><span *ngIf="word.class">{{ word.class }}</span>  {{ word.explain }}</p>
         </div>
       </div>
     </div>
   </div>
-  <!-- End Word Card - fllip type 2 -->
+</div>
+<!-- End Word Card - fllip type 2 -->

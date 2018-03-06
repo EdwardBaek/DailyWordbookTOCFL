@@ -4,6 +4,7 @@ export interface Word {
     sound?: string;
     class?: string;
     explain: string;
+    level?: string;
     tag?: string;
     group?: string;
     order?: number;

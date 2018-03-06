@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Word } from '../../models/Word';
 import { SettingService } from '../../services/setting.service';
+
+import { Word } from '../../models/Word';
+import { CARD_TYPE_NAMES, LEVELS } from '../../models/Types';
+
+import { MockDataService } from '../../services/mock-data.service';
 
 import {
   trigger,
@@ -30,29 +34,38 @@ import {
   ]
 })
 export class WordCardSettingComponent implements OnInit {
-
+  // Word Card Data Option 
   selectedLevel: number;
   selectedWordCardType: number;
-  sampleWord: Word = {
-    index : 1,
-    word : '單字',
-    sound : 'word sound',
-    explain : 'explan of the word',
-    class: '(class of word)',
-  }
+  
+  // Word Card Mock Data
+  sampleWord: Word;
 
+  // For Animation
   shrink: string = 'down';
-
-  constructor(private settingService: SettingService) { }
+  
+  CARD_TYPE_NAMES;
+  LEVELS;
+  
+  constructor(
+    private settingService: SettingService,
+    private mockDataService: MockDataService
+      ) { 
+    this.CARD_TYPE_NAMES = CARD_TYPE_NAMES;
+    this.LEVELS = LEVELS;
+  }
 
   ngOnInit() {
     this.selectedLevel = this.settingService.getLevel();
+    this.sampleWord = this.mockDataService.getMockWordDataByLevel(this.selectedLevel);
     this.selectedWordCardType = this.settingService.getWordCardType();
   }
 
   private setLevel(level) {
     console.log('setLevel', level);
     this.selectedLevel = level;
+    this.sampleWord = this.mockDataService.getMockWordDataByLevel(level);
+    console.log('this.sampleWord', this.sampleWord);
     this.settingService.setLevel(level);
   }
   

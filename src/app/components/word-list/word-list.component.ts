@@ -5,6 +5,8 @@ import { WordDataService } from '../../services/word-data.service';
 import { Word } from '../../models/Word';
 import { SettingService } from '../../services/setting.service';
 
+import { LEVELS } from '../../models/Types';
+
 @Component({
   selector: 'app-word-list',
   templateUrl: './word-list.component.html',
@@ -32,6 +34,7 @@ export class WordListComponent implements OnInit {
   async ngOnInit(){
     console.debug('ngOninit-isLoadedData:', this.isLoadedData);
     this.selectedLevel = this.settingService.getLevel();
+    this.selectedWordCardType = this.settingService.getWordCardType();
     await this.loadWordData(this.selectedLevel);
   }
   
@@ -67,6 +70,17 @@ export class WordListComponent implements OnInit {
   private resetWordsData() {
     this.words = [];
     this.wordsRaw = [];
+  }
+
+  getLevelName(): string {
+    let returnValue: string;
+    for( let level of LEVELS ) {
+      if( level.id == this.selectedLevel ) {
+        returnValue = level.name;
+        break;
+      }
+    }
+    return returnValue;
   }
 
   log(data) {
