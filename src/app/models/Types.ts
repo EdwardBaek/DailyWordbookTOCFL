@@ -1,6 +1,7 @@
 export enum CARD_TYPE {
   'SIMPLE',
   'HIDE',
+  'HIDE2',
   'FLIP',
   'FLIP2',
   // For Test
@@ -9,6 +10,7 @@ export enum CARD_TYPE {
 export const CARD_TYPE_NAMES: any[] = [
   {id:CARD_TYPE.SIMPLE,  name:'Simple'},
   {id:CARD_TYPE.HIDE,    name:'Hide'},
+  {id:CARD_TYPE.HIDE2,   name:'Hide2'},
   {id:CARD_TYPE.FLIP,    name:'Flip'},
   {id:CARD_TYPE.FLIP2,   name:'Flip2'},
   // For Test

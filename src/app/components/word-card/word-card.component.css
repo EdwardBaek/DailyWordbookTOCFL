@@ -1,3 +1,8 @@
+.badge-left-top {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+}
 /* Start Flip Card with Bootstrap */
 .card-wrapper.effect-flip {
     position: relative;
@@ -17,9 +22,12 @@
     transform-style: preserve-3d;
     transition: 0.5s;
 }
+/*
+This is replced to ng animation 
 .card-wrapper.effect-flip .flip-area.flipped {
     transform: rotateY(180deg);
-}
+} 
+*/
 .card-wrapper.effect-flip .card {
     position: absolute;
     display: block;
@@ -37,11 +45,5 @@
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-}
-
-.badge-left-top {
-    position: absolute;
-    top: 10%;
-    left: 5%;
 }
 /* End Flip Card with Bootstrap */

@@ -16,8 +16,13 @@ import {
   styleUrls: ['./word-card.component.css'],
   animations: [
     trigger('showAndHide', [
-      state('unclicked', style({opacity: '0'})),
-      state('clicked', style({opacity: '*'})),
+      state('unclicked',  style({opacity: '0'})),
+      state('clicked',    style({opacity: '*'})),
+      transition('clicked <=> unclicked', animate('0.5s ease-in-out')),
+    ]),
+    trigger('flip', [
+      state('unclicked',  style({transform: 'rotateY(0deg)'})),
+      state('clicked',    style({transform: 'rotateY(180deg)'})),
       transition('clicked <=> unclicked', animate('0.5s ease-in-out')),
     ]),
   ]
