@@ -16,8 +16,9 @@ export const CARD_TYPE_NAMES: any[] = [
   // For Test
   // {id:CARD_TYPE.TEST,   name:'Test'},
 ];
+// Level starts from 1
 export enum LEVEL {
-  'LEVEL_1',
+  'LEVEL_1' = 1,
   'LEVEL_2',
   'LEVEL_3',
   'LEVEL_4',

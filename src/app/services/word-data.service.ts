@@ -41,6 +41,7 @@ export class WordDataService {
     
     let responsedData = await this.getWordDataFromNetwork(level);
     // let responsedData = await this.getWordDataFromNetworkSlowly(level);
+    console.log('>>>Data Level -' + level, responsedData.data);
     
     this.setWordDataByLevel(level, responsedData.data);
     this.setWordDataToLocalStorage(level, responsedData.data);
@@ -65,6 +66,7 @@ export class WordDataService {
   }
 
   async getWordDataFromNetwork(level: number): Promise<any> {
+    console.log('>>>try load data from network');
     try {
       let response = await this.http
       .get(this.getWordListDataUrlByLevel(level))
@@ -85,7 +87,7 @@ export class WordDataService {
 
   getWordDataFromLocalStorage(level: number): any[] {
     console.log('>>>try load data from localStorage');
-    let data = JSON.parse(localStorage.getItem('wordDataLevel'+level));
+    let data = JSON.parse(localStorage.getItem(this.getLocalStorageItemName(level)));
     if(data != null) {
       this.setWordDataByLevel(level, data);
       return data;
@@ -93,7 +95,11 @@ export class WordDataService {
     return [];
   }
   setWordDataToLocalStorage(level: number, data: any[]) {
-    localStorage.setItem('wordDataLevel'+level, JSON.stringify(data));
+    localStorage.setItem(this.getLocalStorageItemName(level), JSON.stringify(data));
+  }
+  
+  getLocalStorageItemName(level: number): string {
+    return 'wordDataLevel' + level;
   }
 
   /**
