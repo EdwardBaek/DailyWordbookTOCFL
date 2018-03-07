@@ -1,11 +1,12 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Output, EventEmitter, ViewChild } from '@angular/core';
 
 import { WordDataService } from '../../services/word-data.service';
-
-import { Word } from '../../models/Word';
 import { SettingService } from '../../services/setting.service';
 
+import { Word } from '../../models/Word';
 import { LEVELS } from '../../models/Types';
+
+import { WordCardSettingComponent } from '../word-card-setting/word-card-setting.component';
 
 @Component({
   selector: 'app-word-list',
@@ -26,19 +27,28 @@ export class WordListComponent implements OnInit {
   words: Word[] = [];
   loadItemCount: number = 100;
 
+  shrinkCardSetting:string = 'down';
+
+
+  @ViewChild(WordCardSettingComponent) wordCardSettingComponent: WordCardSettingComponent;
+
   constructor(
     private wordDataService: WordDataService,
     private settingService: SettingService
   ) { }
 
   async ngOnInit(){
-    console.debug('ngOninit-isLoadedData:', this.isLoadedData);
+    // console.debug('ngOninit-isLoadedData:', this.isLoadedData);
     this.selectedLevel = this.settingService.getLevel();
     this.selectedWordCardType = this.settingService.getWordCardType();
     await this.loadWordData(this.selectedLevel);
   }
   
   async reload() {
+    // change UI
+    this.wordCardSettingComponent.shrinkUp();
+
+    // reload
     this.selectedWordCardType = this.settingService.getWordCardType();
     let selectedLevel = this.settingService.getLevel();
     if( selectedLevel != this.selectedLevel ){
@@ -84,20 +94,16 @@ export class WordListComponent implements OnInit {
   }
 
   log(data) {
-
     console.log(data, data == '' || data == 0);
   }
 
   // Manage screen
-  scroll(el) {
-    // if( el == '' )
-    console.log('!!!',el);
-    el.scrollIntoView({behavior:"smooth"});
+  scroll(element) {
+    element.scrollIntoView({behavior:"smooth"});
   }
 
   @HostListener('window:scroll', ['$event']) 
   private doSomething(event) {
-    // console.debug("Scroll Event", document.body.scrollTop);
     if( this.isLoadedData && ( window.pageYOffset + 1000 ) > ( document.documentElement.offsetHeight - window.innerHeight ) )
       this.displayWordsByLimit();
   }

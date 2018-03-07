@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
 import { SettingService } from '../../services/setting.service';
+import { MockDataService } from '../../services/mock-data.service';
 
 import { Word } from '../../models/Word';
 import { CARD_TYPE_NAMES, LEVELS } from '../../models/Types';
 
-import { MockDataService } from '../../services/mock-data.service';
 
 import {
   trigger,
@@ -42,7 +43,7 @@ export class WordCardSettingComponent implements OnInit {
   sampleWord: Word;
 
   // For Animation
-  shrink: string = 'down';
+  shrinkStatus: string = 'down';
   
   CARD_TYPE_NAMES;
   LEVELS;
@@ -68,7 +69,6 @@ export class WordCardSettingComponent implements OnInit {
     console.log('this.sampleWord', this.sampleWord);
     this.settingService.setLevel(level);
   }
-  
   private setWordCardType(wordCardType) {
     console.log('setWordCardType', wordCardType);
     this.selectedWordCardType = wordCardType;
@@ -76,6 +76,13 @@ export class WordCardSettingComponent implements OnInit {
   }
 
   public toggle() {
-      this.shrink = this.shrink === 'up' ? 'down' : 'up';
+      this.shrinkStatus = this.shrinkStatus === 'up' ? 'down' : 'up';
+  }
+  // XXX: think of better names
+  public shrinkUp() {
+    this.shrinkStatus = 'up';
+  }
+  public shrinkDown() {
+    this.shrinkStatus = 'down';
   }
 }

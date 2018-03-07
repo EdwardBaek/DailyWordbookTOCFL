@@ -2,10 +2,10 @@
   <div class="card mb-2">
     <div class="card-header" (click)="toggle()" >
       Card Setting
-      <i class="fa fa-angle-up" *ngIf="shrink == 'down'"></i>
-      <i class="fa fa-angle-down" *ngIf="shrink == 'up'"></i>
+      <i class="fa fa-angle-up" *ngIf="shrinkStatus == 'down'"></i>
+      <i class="fa fa-angle-down" *ngIf="shrinkStatus == 'up'"></i>
     </div>
-    <div class="card-body" [@shrinkUpDown]="shrink">
+    <div class="card-body" [@shrinkUpDown]="shrinkStatus">
       <!-- Start Select Level -->
       <div class="form-group mb-2">
           <label>Select Level</label>
