@@ -1,3 +1,8 @@
+<div #top></div>
+<div class="fixed-bottom-right">
+  <button class="btn btn-primary" id="top-button" (click)="scroll(top)"><i class="fa fa-arrow-up"></i></button>
+  <button class="btn btn-primary" id="top-button" (click)="scroll(bottom)"><i class="fa fa-arrow-down"></i></button>
+</div>
 <app-word-card-setting></app-word-card-setting>
 
 <button class="btn btn-primary btn-block" (click)="reload()">Load Word Card</button>
@@ -7,6 +12,8 @@
   <h3>Level : {{ selectedLevel + 1 }}</h3>
   <app-word-card *ngFor="let word of words" [word]="word" [cardType]="selectedWordCardType"></app-word-card>
 </div>
+
+<div #bottom></div>
 
 <!-- Data loading Exception -->
 <div *ngIf="isLoadingData">

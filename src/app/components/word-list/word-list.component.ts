@@ -84,7 +84,15 @@ export class WordListComponent implements OnInit {
   }
 
   log(data) {
-    console.log(data);
+
+    console.log(data, data == '' || data == 0);
+  }
+
+  // Manage screen
+  scroll(el) {
+    // if( el == '' )
+    console.log('!!!',el);
+    el.scrollIntoView({behavior:"smooth"});
   }
 
   @HostListener('window:scroll', ['$event']) 

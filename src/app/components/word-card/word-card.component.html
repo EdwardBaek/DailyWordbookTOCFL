@@ -2,7 +2,7 @@
 
 <!-- Start Simple Word Card -->
 <div *ngIf="selectedCardType == CARD_TYPE.SIMPLE && word">
-  <div class="card-wrapper mb-2 card-word">
+  <div class="card-wrapper mb-2 card-word" ref-word{{word.index}}>
     <div class="card text-center">
       <span class="badge badge-left-top badge-light">{{ word.index }}</span>
       <div class="card-body">

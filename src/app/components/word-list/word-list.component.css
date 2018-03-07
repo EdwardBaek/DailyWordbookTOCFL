@@ -1,47 +1,17 @@
-/* Start Flip Card with Bootstrap */
-.card-wrapper.effect-flip {
-    position: relative;
-    perspective: 800px;
-    cursor: pointer;
+.fixed-bottom-right {
+    position: fixed;
+    z-index: 999;
+    right: 5%;
+    bottom: 5%;
 }
-.card-wrapper.card-word {
-    width: 100%;
-    min-height: 180px;
-    max-width: 500px;
-    margin: auto;
+.fixed-bottom-right input {
+    line-height: 1.5;
+    border-radius: 0.25rem;
 }
-.card-wrapper.effect-flip .flip-area {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: 0.8s;
+#top-button {
+    opacity: 0.4;
 }
-.card-wrapper.effect-flip .flip-area.flipped {
-    transform: rotateY(180deg);
+#top-button:hover,
+#top-button:active {
+    opacity: 0.65;
 }
-.card-wrapper.effect-flip .card {
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-}
-.card-wrapper.effect-flip .card.face-back {
-    transform: rotateY(180deg);
-}
-.card-wrapper.effect-flip .card .card-content {
-    padding: 2rem;
-}
-.card-wrapper.effect-flip .card .card-content.vertical-align-middle {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.badge-left-top {
-    position: absolute;
-    top: 10%;
-    left: 5%;
-}
-/* End Flip Card with Bootstrap */
