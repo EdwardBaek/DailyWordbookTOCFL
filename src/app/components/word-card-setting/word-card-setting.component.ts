@@ -58,14 +58,14 @@ export class WordCardSettingComponent implements OnInit {
 
   ngOnInit() {
     this.selectedLevel = this.settingService.getLevel();
-    this.sampleWord = this.mockDataService.getMockWordDataByLevel(this.selectedLevel);
+    this.sampleWord = this.mockDataService.getMocSamplekWordDataByLevel(this.selectedLevel);
     this.selectedWordCardType = this.settingService.getWordCardType();
   }
 
   private setLevel(level) {
     console.log('setLevel', level);
     this.selectedLevel = level;
-    this.sampleWord = this.mockDataService.getMockWordDataByLevel(level);
+    this.sampleWord = this.mockDataService.getMocSamplekWordDataByLevel(level);
     console.log('this.sampleWord', this.sampleWord);
     this.settingService.setLevel(level);
   }
