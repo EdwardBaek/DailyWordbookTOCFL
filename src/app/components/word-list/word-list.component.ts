@@ -8,10 +8,39 @@ import { LEVELS } from '../../models/Types';
 
 import { WordCardSettingComponent } from '../word-card-setting/word-card-setting.component';
 
+import { trigger, state, style, animate, transition, group } from '@angular/animations';
+
 @Component({
   selector: 'app-word-list',
   templateUrl: './word-list.component.html',
-  styleUrls: ['./word-list.component.css']
+  styleUrls: ['./word-list.component.css'],
+  animations: [
+    trigger('showAndHide', [
+      state('false', style({opacity: '0'})),
+      state('true', style({opacity: '1'})),
+      transition('false => true', animate('0.5s ease-in', style({ opacity:'1'}))),
+      transition('true => false', animate('0.5s ease-out', style({ opacity:'0'}))),
+    ]),
+  
+    trigger('flyInOutFromRigth', [
+      state('true', style({  opacity: 1})),
+      state('false', style({ opacity: 0})),
+      transition('false => true', [
+        style({transform: 'translateX(50px)', opacity: 0}),
+        group([
+          animate('0.5s ease', style({opacity: 1})),
+          animate('0.5s 0.2s ease', style({ transform: 'translateX(0)'})),
+        ])
+      ]),
+      transition('true => false', [
+        group([
+          animate('0.5s ease', style({transform: 'translateX(50px)'})),
+          animate('0.5s 0.2s ease', style({opacity: 0})),
+        ])
+      ])
+    ])
+
+  ],
 })
 export class WordListComponent implements OnInit {
   // Data Management
@@ -26,9 +55,7 @@ export class WordListComponent implements OnInit {
   // For display Word Cards
   words: Word[] = [];
   loadItemCount: number = 100;
-
-  shrinkCardSetting:string = 'down';
-
+  isscrolled = false;
 
   @ViewChild(WordCardSettingComponent) wordCardSettingComponent: WordCardSettingComponent;
 
@@ -94,7 +121,7 @@ export class WordListComponent implements OnInit {
   }
 
   log(data) {
-    console.log(data, data == '' || data == 0);
+    console.log(data);
   }
 
   // Manage screen
@@ -104,7 +131,15 @@ export class WordListComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event']) 
   private doSomething(event) {
+    // 
     if( this.isLoadedData && ( window.pageYOffset + 1000 ) > ( document.documentElement.offsetHeight - window.innerHeight ) )
       this.displayWordsByLimit();
+    
+    // 
+    if( window.pageYOffset > 600 ){
+      this.isscrolled = true;
+    } else {
+      this.isscrolled = false;
+    }
   }
 }

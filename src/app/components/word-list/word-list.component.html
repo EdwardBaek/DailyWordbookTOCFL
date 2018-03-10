@@ -1,5 +1,5 @@
 <div #top></div>
-<div class="fixed-bottom-right">
+<div class="fixed-bottom-right" [@flyInOutFromRigth]="isscrolled">
   <button class="btn btn-primary" id="top-button" (click)="scroll(top)"><i class="fa fa-arrow-up"></i></button>
   <button class="btn btn-primary" id="top-button" (click)="scroll(bottom)"><i class="fa fa-arrow-down"></i></button>
 </div>
