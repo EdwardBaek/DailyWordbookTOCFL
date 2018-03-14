@@ -6,7 +6,6 @@ import { MockDataService } from '../../services/mock-data.service';
 import { Word } from '../../models/Word';
 import { CARD_TYPE_NAMES, LEVELS } from '../../models/Types';
 
-
 import {
   trigger,
   state,

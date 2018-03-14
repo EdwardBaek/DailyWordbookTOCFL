@@ -2,5 +2,15 @@
   quiz-question works!
 </p>
 
+<button class="btn btn-primary" (click)="reloadTest()">Reload Test</button>
 <a routerLink="../score">Go to Quiz Score</a>
+<hr>
+<div *ngFor="let question of questions">
+  <div class="card">
+    <div class="card card-header">{{ question.index }} : {{ question.questionWord.word }}</div>
+    <div class="card card-body">
+      <div class="card" *ngFor="let answer of question.answers" [class.target]="answer.index == question.questionWord.index">{{ answer.explain }}</div>
+    </div>
+  </div>
+</div>
 
