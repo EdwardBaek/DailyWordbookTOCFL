@@ -6,6 +6,7 @@
 /* Start Flip Card with Bootstrap */
 .card-wrapper.effect-flip {
     position: relative;
+    -webkit-perspective: 800px;
     perspective: 800px;
     cursor: pointer;
 }
@@ -19,24 +20,34 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
+    -webkit-transition: 0.5s;
     transition: 0.5s;
 }
-/*
-This is replced to ng animation 
+
+/* This is replced to ng animation  */
 .card-wrapper.effect-flip .flip-area.flipped {
+    -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
 } 
-*/
+
 .card-wrapper.effect-flip .card {
     position: absolute;
     display: block;
     width: 100%;
     height: 100%;
+}
+.card-wrapper.effect-flip .card.face-front,
+.card-wrapper.effect-flip .card.face-back {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0,0,0);
     backface-visibility: hidden;
+    visibility: visible;
 }
 .card-wrapper.effect-flip .card.face-back {
-    transform: rotateY(180deg);
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
 }
 .card-wrapper.effect-flip .card .card-content {
     padding: 2rem;
@@ -44,6 +55,7 @@ This is replced to ng animation
 .card-wrapper.effect-flip .card .card-content.vertical-align-middle {
     position: relative;
     top: 50%;
+    -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
 }
 /* End Flip Card with Bootstrap */

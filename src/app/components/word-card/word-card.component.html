@@ -55,7 +55,7 @@
 <!-- Start Word Card - fllip type -->
 <div *ngIf="selectedCardType == CARD_TYPE.FLIP && word">
   <div class="card-wrapper mb-2 card-word effect-flip">
-    <div class="flip-area text-center" [@flip]="cardClickState">
+    <div class="flip-area text-center" [class.flipped]="flipped">
       <div class="card face-front">
         <span class="badge badge-left-top badge-light">{{ word.index }}</span>
         <div class="card-content vertical-align-middle">

@@ -23,7 +23,8 @@ import {
     trigger('flip', [
       state('unclicked',  style({transform: 'rotateY(0deg)'})),
       state('clicked',    style({transform: 'rotateY(180deg)'})),
-      transition('clicked <=> unclicked', animate('0.5s ease-in-out')),
+      // FIXME: If below transition is on, flipping two times on back to front side on FireFox.
+      // transition('clicked <=> unclicked', animate('0.5s ease-in-out')),
     ]),
   ]
 })
@@ -32,6 +33,7 @@ export class WordCardComponent implements OnInit {
   @Input('word') word: Word;
   @Input('cardType') selectedCardType: number;
   cardClickState: string = 'unclicked';
+  flipped: boolean = false;
 
   CARD_TYPE;
   
@@ -43,6 +45,7 @@ export class WordCardComponent implements OnInit {
   }
   onCardClick() {
     this.cardClickState = (this.cardClickState == 'clicked') ? 'unclicked' : 'clicked';
+    this.flipped = ( this.cardClickState == 'clicked' ) ? true : false
     console.log('this.cardClickState',this.cardClickState);
   }
 }
