@@ -1,0 +1,26 @@
+.card.card-shadow {
+   box-shadow: 0 2px 5px 0 rgba(0,0,0,.16);
+   border: 0px;
+}
+.card.card-effect-hover {
+    transition: 0.5s;
+}
+.card.card-shadow.card-effect-hover:hover,
+.card.card-shadow.card-effect-hover:active,
+.card.card-shadow.card-effect-hover.active
+{
+    transform: translateY(-10%);
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,.16);
+    cursor: pointer;
+}
+.card.card-shadow.card-effect-hover.active,
+.card.card-shadow.card-effect-hover:active {
+    /* background-color: #007bff75; */
+    border-left: 1.5rem solid #007bff75;
+}
+.card.card-answer.correct {
+    border-left: 1.5rem solid #5fba7d;
+}
+.card.card-answer.incorrect {
+    border-left: 1.5rem solid #e12a2a;
+}

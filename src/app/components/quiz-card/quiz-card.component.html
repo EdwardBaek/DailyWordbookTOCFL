@@ -1,0 +1,25 @@
+<div class="card mb-3 card-shadow">
+  <div class="card card-body">
+    <!-- Start Question -->
+    <div *ngIf="question && question.questionWord && question.questionWord.word">
+      <h3 class="card-title text-center mb-4">
+        {{ question.questionWord.word }}
+      </h3>
+      <div 
+        class="card card-answer mb-3 px-3 py-2 card-shadow card-effect-hover"  
+        *ngFor="let answer of question.answers" 
+        (click)="onClickAnswer(answer.index)"
+        [class.active]="selectedWordIndex === answer.index"
+      >
+        <p class="card-text">
+          {{ answer.explain }}
+        </p>
+      </div>
+    </div>
+    <!-- End Question -->
+    <div *ngIf="!question">
+      <h5>Sorry, </h5>
+      <p>There is something wrong...</p>
+    </div>
+  </div>
+</div>

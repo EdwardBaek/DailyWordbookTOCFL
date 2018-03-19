@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Word } from '../../models/Word';
 import { Question } from '../../models/Question';
-import { WordDataService } from '../../services/word-data.service';
 import { QuizService } from '../../services/quiz.service';
+import { QuizCardComponent } from '../quiz-card/quiz-card.component';
+import { Router, ActivatedRoute } from '@angular/router';
+import { QuizScoreComponent } from '../quiz-score/quiz-score.component';
 
 @Component({
   selector: 'app-quiz-question',
@@ -15,43 +17,64 @@ import { QuizService } from '../../services/quiz.service';
 export class QuizQuestionComponent implements OnInit {
   words: Word[];
   questions: Question[] = [];
+  selectedQuestion: Question;
+  selectedQuestionIndex: number = 0;
+  selectedAnswereIndex: number = 0;
+
   // constructor() { }
   constructor(
-    private wordDataService: WordDataService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private quizService: QuizService
   ) { }
 
-  ngOnInit(){
-    let level = 1;
-    // this.test(level); 
-
+  async ngOnInit(){
     let option = {
-      level: 1,
-      number: 20
+      level: 4,
+      number: 5
     }
-    this.quizTest(option);
+    await this.quizTest(option);
+    
+    this.quizService.currentAnswer.subscribe( answer => {
+      this.selectedAnswereIndex = answer;
+      this.changeCurrentQuestionInfo(this.selectedAnswereIndex);
+      console.log('answer - ', answer, this.selectedQuestion);
+     } );
   }
 
   reloadTest() {  
-    let level = 1;
-    // this.test(level); 
-
     let option = {
-      level: 1,
-      number: 20
+      level: 4,
+      number: 5
     }
     this.quizTest(option);
   }
 
-  // async test(level: number) {
-  //   let words = await this.wordDataService.getWordList(level);
-  //   this.words = words;
-  //   console.log( words );
-  // }
-
   async quizTest(option) {
-    
-    this.questions = await this.quizService.getNewQuestions(option);
+    this.questions = await this.quizService.getNewQuestions();
+    this.selectedQuestion = this.questions[this.selectedQuestionIndex];
     console.log('questions',this.questions);
+  }
+
+  onClickPrevious() {
+    this.selectedQuestion = this.questions[--this.selectedQuestionIndex];
+  }
+  onClickNext() {
+    this.setSelectedAnswerIndex();
+    this.selectedQuestion = this.questions[++this.selectedQuestionIndex];
+  }
+  onClickScore() {
+    this.setSelectedAnswerIndex();
+    this.quizService.setQuizResult = this.questions;
+
+    this.router.navigate(['../score'], { relativeTo: this.activatedRoute});
+  }
+  private setSelectedAnswerIndex () {
+    if( !this.selectedAnswereIndex )
+      this.selectedAnswereIndex = 0;
+    this.questions[this.selectedQuestionIndex].selectedWordIndex = this.selectedAnswereIndex;
+  }
+  private changeCurrentQuestionInfo(answer: number) {
+    this.questions[this.selectedQuestionIndex].selectedWordIndex = answer;
   }
 }

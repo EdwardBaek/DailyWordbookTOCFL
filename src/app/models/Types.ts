@@ -31,3 +31,9 @@ export const LEVELS: any[] = [
   {id: LEVEL.LEVEL_4,  name:'Level 4', value: 4},
   {id: LEVEL.LEVEL_5,  name:'Level 5', value: 5}
 ];
+export const QUESTION_COUNT: any[] = [
+  {id:1, value: 5},
+  {id:2, value: 10},
+  {id:3, value: 15},
+  {id:4, value: 20},
+];

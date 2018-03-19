@@ -30,6 +30,7 @@ import { WordCardSettingComponent } from './components/word-card-setting/word-ca
 // For Animation
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MockDataService } from './services/mock-data.service';
+import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MockDataService } from './services/mock-data.service';
     NotFoundComponent,
     QuizQuestionComponent,
     WordCardComponent,
-    WordCardSettingComponent
+    WordCardSettingComponent,
+    QuizCardComponent
   ],
   imports: [
     BrowserModule,
