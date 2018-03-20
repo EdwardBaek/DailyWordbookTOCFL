@@ -918,3 +918,106 @@ export const MOCK_WORD_DATA_LEVEL_5: Word[] = [
          "explain":"calamity caused by humans"
       },
 ]
+
+export interface Question {
+    index: number;
+    selectedWordIndex?: number;
+    isAnswerCorrect?: boolean;
+    questionWord : Word;
+    answers: Word[];
+}
+export const MOCK_QUIZ_RESULT = 
+[  
+    {  
+      "index":1,
+      "questionWord":{  
+        "index":497,
+        "word":"更",
+        "sound":"gèng",
+        "level":"Level 1",
+        "class":"(Adv)",
+        "explain":"even more, still more"
+      },
+      "answers":[  
+        {  
+          "index":353,
+          "word":"謝謝",
+          "sound":"xièxie",
+          "level":"Level 1",
+          "class":"(VS)",
+          "explain":"to thanks, to thank you"
+        },
+        {  
+          "index":497,
+          "word":"更",
+          "sound":"gèng",
+          "level":"Level 1",
+          "class":"(Adv)",
+          "explain":"even more, still more"
+        },
+        {  
+          "index":453,
+          "word":"時間",
+          "sound":"shíjiān",
+          "level":"Level 1",
+          "class":"(N)",
+          "explain":"time"
+        },
+        {  
+          "index":346,
+          "word":"毛",
+          "sound":"máo",
+          "level":"Level 1",
+          "class":"(M)",
+          "explain":"one-tenth of a yuan"
+        }
+      ],
+      "selectedWordIndex":497
+    },
+    {  
+      "index":2,
+      "questionWord":{  
+        "index":169,
+        "word":"學校",
+        "sound":"xuéxiào",
+        "level":"Level 1",
+        "class":"(N)",
+        "explain":"school"
+      },
+      "answers":[  
+        {  
+          "index":97,
+          "word":"是",
+          "sound":"shì",
+          "level":"Level 1",
+          "class":"(SHI)",
+          "explain":"to be(am, are, is)"
+        },
+        {  
+          "index":169,
+          "word":"學校",
+          "sound":"xuéxiào",
+          "level":"Level 1",
+          "class":"(N)",
+          "explain":"school"
+        },
+        {  
+          "index":113,
+          "word":"畫",
+          "sound":"huà",
+          "level":"Level 1",
+          "class":"(N)",
+          "explain":"drawings, pictures"
+        },
+        {  
+          "index":277,
+          "word":"弟弟",
+          "sound":"dìdì",
+          "level":"Level 1",
+          "class":"(N)",
+          "explain":"younger brother"
+        }
+      ],
+      "selectedWordIndex":0
+    },
+  ]

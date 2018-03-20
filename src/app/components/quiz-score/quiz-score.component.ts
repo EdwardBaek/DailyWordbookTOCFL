@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../../services/quiz.service';
+import { MockDataService } from '../../services/mock-data.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-score',
@@ -7,11 +9,21 @@ import { QuizService } from '../../services/quiz.service';
   styleUrls: ['./quiz-score.component.css']
 })
 export class QuizScoreComponent implements OnInit {
+  quizScore;
 
-  constructor(private quizService: QuizService) { }
+  constructor(
+    private quizService: QuizService,
+    private mockDataService: MockDataService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    console.log( 'quizService.getQuizResult', this.quizService.getQuizResult );
+    // For test
+    // if( !this.quizService.getQuizResult )
+    //   this.quizService.setQuizResult = this.mockDataService.getMockQuizResult();
+    this.quizScore = this.quizService.getScore;
+    console.log( 'this.quizScore', this.quizScore );
   }
 
 }

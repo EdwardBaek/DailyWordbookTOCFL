@@ -7,12 +7,31 @@
 <p>
   <a routerLink="/quiz/re/question">Go to Quiz-re</a>
 </p>
-
 <div class="card">
-  <div class="card-haeder text-center">
-    <h4>Score</h4>
+  <div class="card-header text-center">
+    <h5>Score</h5>
   </div>
-  <div class="card-body">
-    <h5>{{ 1 }} / {{ 5 }} of total {{ 5 }} words.</h5>
+  <div class="card-body text-center">
+    <div *ngIf="quizScore">
+      <div class="info-area mb-4">
+        <h5>{{ quizScore.score }} of total {{ quizScore.totalWords }} words.</h5>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col text-center">
+          <h4><i class="fa fa-check-circle" style="color:limegreen"></i></h4>
+          <div class="card mb-2 py-2" *ngFor="let data of quizScore.correctAnsweredWords" >{{ data.word }}</div>
+        </div>
+        <div class="col text-center">
+          <h4><i class="fa fa-times-circle" style="color:crimson"></i></h4>
+          <div class="card mb-2 py-2" *ngFor="let data of quizScore.incorrectAnsweredWords" >{{ data.word }}</div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!quizScore">
+      <p>No Data</p>
+    </div>
   </div>
 </div>
+<button class="btn btn-primary btn-block my-2" routerLink="/">Main</button>
+<button class="btn btn-primary btn-block my-2" routerLink="/quiz/new/setting">New Quiz</button>

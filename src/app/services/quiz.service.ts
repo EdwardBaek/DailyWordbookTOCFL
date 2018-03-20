@@ -10,19 +10,28 @@ export class QuizService {
   leftWords: Word[];
   questions: Question[];
   wordList: Word[];
-  incorrectAnswers: any[];
+  fakeAnswers: any[];
+  quizResult: Question[];
+  scoreData: any = {
+    socre: 0,
+    totalWords:  5,
+    level: 1,
+    date: 'date',
+    correctAnsweredWords : [],
+    incorrectAnsweredWords : []
+  };
+  // Quiz onWorking Data
+  selectedAnswerWordIndex: number;
 
   private currentAnswerSource = new BehaviorSubject<number>(0);
   currentAnswer = this.currentAnswerSource.asObservable();
+
   // Set Defualt value
   option: any = {
     level: 1,
-    number: 20
+    number: 5
   };
 
-  // Quiz onWorking Data
-  selectedAnswerWordIndex: number;
-  quizResult: Question[];
 
   constructor(private wordDataService: WordDataService) { }
   
@@ -33,13 +42,16 @@ export class QuizService {
   resetData() {
     this.questions = [];
     this.wordList = [];
-    this.incorrectAnswers = [];
+    this.fakeAnswers = [];
   }
   set setOption(option) {
     this.option = option;
   }
   get getOption() {
     return this.option;
+  }
+  get getQuestions() {
+    return this.questions;
   }
   set setQuizResult(quizResult) {
     this.quizResult = quizResult;
@@ -58,6 +70,7 @@ export class QuizService {
   async getNewQuestions() {
     return this.getNewQuestionsWithOption(this.option);
   }
+
   async getNewQuestionsWithOption(option:{level:number, number:number}):Promise<Question[]> {
     if(!option) option = this.option;
     this.resetData();
@@ -65,7 +78,7 @@ export class QuizService {
     let wordData = await this.wordDataService.getWordList(option.level);
     this.questions = new Array(option.number);
     this.wordList = this.getRandomWordsData(wordData, option.number);
-    this.incorrectAnswers = this.getRandomIcorrectAnswerData(wordData, this.wordList);
+    this.fakeAnswers = this.getRandomIcorrectAnswerData(wordData, this.wordList);
     // console.log('wordData',wordData);
     // console.log( 'answers', answers );
     // console.log( 'incorrectAnswers', incorrectAnswers );
@@ -77,7 +90,7 @@ export class QuizService {
       let question: Question = {
         index: i+1,
         questionWord: this.wordList[i],
-        answers: this.incorrectAnswers[i]
+        answers: this.fakeAnswers[i]
       }
       // console.log( 'questions'+i, question );
       this.questions[i] = question;
@@ -85,6 +98,42 @@ export class QuizService {
 
     // console.log( 'questions', questions );
     return this.questions;
+  }
+
+  get getScore() {
+    if( !this.quizResult )
+      return undefined;
+    this.calculateScore();
+    return this.scoreData;
+  }
+
+  private calculateScore() {
+    let score: number = 0;
+    let correctArray: any[] = [];
+    let incorrectArray: any[] = [];
+
+    this.quizResult.forEach( (cur, inx) => {
+      if ( cur.isAnswerCorrect != undefined ){
+        if( cur.isAnswerCorrect == true ){
+          score++;
+          correctArray.push(cur.questionWord);
+        }
+      } else if( cur.selectedWordIndex == cur.questionWord.index ){
+          score++;
+          correctArray.push(cur.questionWord);
+      } else {
+        incorrectArray.push(cur.questionWord);
+      }
+    });
+
+    this.scoreData = {
+      score: score,
+      totalWords: this.quizResult.length,
+      date: new Date(),
+      level: this.option.level,
+      correctAnsweredWords: correctArray,
+      incorrectAnsweredWords: incorrectArray
+    }
   }
 
   private getRandomWordsData(wordDataRaw: any[], number: number): any[] {
