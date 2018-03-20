@@ -42,6 +42,10 @@ export class QuizSettingComponent implements OnInit {
     this.setQuizOption();
   }
   private setQuizOption() {
+    this.quizOption = {
+      level: this.selectedLevel,
+      number: this.selectedQuizNumber
+    };
     this.quizService.setOption = this.quizOption;
   }
   private goQuiz() {
