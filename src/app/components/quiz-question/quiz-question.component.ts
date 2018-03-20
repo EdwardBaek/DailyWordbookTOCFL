@@ -20,37 +20,43 @@ export class QuizQuestionComponent implements OnInit {
   selectedQuestion: Question;
   selectedQuestionIndex: number = 0;
   selectedAnswereIndex: number = 0;
+  isReQuiz: boolean = false;
 
   // constructor() { }
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService
-  ) { }
+  ) { 
+    this.activatedRoute.parent.params.subscribe(params => {
+      console.log('params', params);
+      if( params.type == 're' )
+        this.isReQuiz = true;
+    });
+  }
 
   async ngOnInit(){
-    let option = {
-      level: 4,
-      number: 5
+
+    if ( this.isReQuiz ) {
+      this.loadReQuiz();
+    } else {
+      await this.loadQuiz();
     }
-    await this.quizTest(option);
     
     this.quizService.currentAnswer.subscribe( answer => {
       this.selectedAnswereIndex = answer;
       this.changeCurrentQuestionInfo(this.selectedAnswereIndex);
       console.log('answer - ', answer, this.selectedQuestion);
-     } );
+    });
   }
 
-  reloadTest() {  
-    let option = {
-      level: 4,
-      number: 5
-    }
-    this.quizTest(option);
+  loadReQuiz() {
+    this.questions = this.quizService.getQuestions;
+    console.log('questions',this.questions);
+    this.selectedQuestion = this.questions[this.selectedQuestionIndex];
   }
 
-  async quizTest(option) {
+  async loadQuiz() {
     this.questions = await this.quizService.getNewQuestions();
     this.selectedQuestion = this.questions[this.selectedQuestionIndex];
     console.log('questions',this.questions);
@@ -69,6 +75,7 @@ export class QuizQuestionComponent implements OnInit {
 
     this.router.navigate(['../score'], { relativeTo: this.activatedRoute});
   }
+  
   private setSelectedAnswerIndex () {
     if( !this.selectedAnswereIndex )
       this.selectedAnswereIndex = 0;
