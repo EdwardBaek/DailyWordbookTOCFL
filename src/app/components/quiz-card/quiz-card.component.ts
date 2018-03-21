@@ -29,8 +29,8 @@ export class QuizCardComponent implements OnInit {
     else
       this.selectedWordIndex = 0;
 
-    this.quizService.changeAnswer(this.selectedWordIndex);
-    // console.log('onClickAnswer : ', this.selectedWordIndex);
+      console.log('onClickAnswer : ', this.selectedWordIndex);
+      this.quizService.changeAnswer(this.selectedWordIndex);
   }
   ngOnChanges(changes: SimpleChanges) {
     // if( !changes.question.firstChange ){
@@ -40,9 +40,10 @@ export class QuizCardComponent implements OnInit {
     //   }
     // }
     // this.quizService.setSelectedAnswerWordIndex = this.selectedWordIndex;
-    if(!changes.question.firstChange && changes.question.currentValue.selectedWordIndex)
+    if( changes.question.currentValue.selectedWordIndex) {
       this.selectedWordIndex = changes.question.currentValue.selectedWordIndex;
-    console.log('ngOnChanges- : ', changes.question.currentValue);
+      console.log('ngOnChanges- : ', changes.question.currentValue);
+    }
   }
 
 }

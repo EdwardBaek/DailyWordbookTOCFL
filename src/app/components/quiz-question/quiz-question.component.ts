@@ -36,7 +36,6 @@ export class QuizQuestionComponent implements OnInit {
   }
 
   async ngOnInit(){
-
     if ( this.isReQuiz ) {
       this.loadReQuiz();
     } else {
@@ -46,20 +45,20 @@ export class QuizQuestionComponent implements OnInit {
     this.quizService.currentAnswer.subscribe( answer => {
       this.selectedAnswereIndex = answer;
       this.changeCurrentQuestionInfo(this.selectedAnswereIndex);
-      console.log('answer - ', answer, this.selectedQuestion);
+      console.log('this.quizService.currentAnswer - ', answer, this.selectedQuestion);
     });
   }
 
   loadReQuiz() {
     this.questions = this.quizService.getQuestions;
-    console.log('questions',this.questions);
+    console.log('loadReQuiz-questions',this.questions);
     this.selectedQuestion = this.questions[this.selectedQuestionIndex];
   }
 
   async loadQuiz() {
     this.questions = await this.quizService.getNewQuestions();
     this.selectedQuestion = this.questions[this.selectedQuestionIndex];
-    console.log('questions',this.questions);
+    console.log('loadQuiz-questions',this.questions);
   }
 
   onClickPrevious() {

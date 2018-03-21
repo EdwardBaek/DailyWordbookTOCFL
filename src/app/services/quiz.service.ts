@@ -33,7 +33,9 @@ export class QuizService {
   };
 
 
-  constructor(private wordDataService: WordDataService) { }
+  constructor(private wordDataService: WordDataService) {
+    console.log('>>>quizService is initailized.');
+  }
   
   changeAnswer(answer: number) {
     this.currentAnswerSource.next(answer);
@@ -50,14 +52,11 @@ export class QuizService {
   get getOption() {
     return this.option;
   }
-  get getQuestions() {
-    return this.questions;
-  }
   set setQuizResult(quizResult) {
-    this.quizResult = quizResult;
+    this.quizResult = this.getCopyArray(quizResult);
   }
   get getQuizResult() {
-    return this.quizResult;
+    return this.getCopyArray(this.quizResult);
   }
   
   set setSelectedAnswerWordIndex(selectedAnswerWordIndex: number) {
@@ -66,8 +65,13 @@ export class QuizService {
   get getSelectedAnswerWordIndex() {
     return this.selectedAnswerWordIndex;
   }
-
+  
+  get getQuestions() {
+    this.changeAnswer(0);
+    return this.getCopyArray(this.questions);
+  }
   async getNewQuestions() {
+    this.changeAnswer(0);
     return this.getNewQuestionsWithOption(this.option);
   }
 
@@ -97,7 +101,10 @@ export class QuizService {
     }
 
     // console.log( 'questions', questions );
-    return this.questions;
+    // let returnResult = this.questions.slice();
+    // console.log('returnResult', returnResult);
+    // console.log('this.questions', this.questions);
+    return this.getCopyArray(this.questions);
   }
 
   get getScore() {
@@ -137,7 +144,7 @@ export class QuizService {
   }
 
   private getRandomWordsData(wordDataRaw: any[], number: number): any[] {
-    let wordData = wordDataRaw.slice(0);
+    let wordData = this.getCopyArray(wordDataRaw);
     // Copy array value
     // console.log('getRandomWordsData start-length:', wordData.length);
     let wordArray = [];
@@ -153,7 +160,7 @@ export class QuizService {
   private getRandomIcorrectAnswerData(wordDataRaw: any[], answer: any[]) :Word[] {
     const answerNum = 3;
     // Copy array value
-    let wordData = wordDataRaw.slice(0);
+    let wordData = this.getCopyArray(wordDataRaw);
     // console.log('getRandomIcorrectAnswerData start-length:', wordData.length);
     let answerArray = [];
     let tempWord;
@@ -190,6 +197,11 @@ export class QuizService {
       if( cur == value ) return true;
     });
     return false;
+  }
+  private getCopyArray(originArray){
+    // let cloned = originArray ? originArray.slice() : null;
+    let cloned = originArray.map(x => Object.assign({}, x));
+    return cloned;
   }
 
 }
