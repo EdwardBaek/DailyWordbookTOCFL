@@ -15,8 +15,7 @@
 }
 .card.card-shadow.card-effect-hover.active,
 .card.card-shadow.card-effect-hover:active {
-    /* background-color: #007bff75; */
-    border-left: 1.5rem solid #007bff75;
+    border-left: 1.5rem solid #64B5F6;
 }
 .card.card-answer.correct {
     border-left: 1.5rem solid #5fba7d;
