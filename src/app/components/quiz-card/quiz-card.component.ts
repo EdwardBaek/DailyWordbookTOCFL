@@ -8,15 +8,9 @@ import { QuizService } from '../../services/quiz.service';
   styleUrls: ['./quiz-card.component.css']
 })
 export class QuizCardComponent implements OnInit {
-  // Mock Data
-  // question: Question = {
-  //   index: 0,
-  //   questionWord: {index: 11, word:'Test', explain:'test'},
-  //   answers: [{index: 12, word:'What', explain:'is this?'},{index: 11, word:'Test', explain:'test'}]
-  // };
-  // @Output() onVoted = new EventEmitter<boolean>();
   @Input('question') question: Question;
   selectedWordIndex: number = 0;
+  showAnswerChecker: boolean = false;
 
   constructor(private quizService: QuizService) { }
 
@@ -29,21 +23,16 @@ export class QuizCardComponent implements OnInit {
     else
       this.selectedWordIndex = 0;
 
-      console.log('onClickAnswer : ', this.selectedWordIndex);
-      this.quizService.changeAnswer(this.selectedWordIndex);
+    console.log('onClickAnswer : ', this.selectedWordIndex);
   }
   ngOnChanges(changes: SimpleChanges) {
-    // if( !changes.question.firstChange ){
-    //   let question: Question = changes.question.currentValue;
-    //   if( !question.selectedWordIndex ){
-    //     this.selectedWordIndex = question.questionWord.index;
-    //   }
-    // }
-    // this.quizService.setSelectedAnswerWordIndex = this.selectedWordIndex;
-    if( changes.question.currentValue.selectedWordIndex) {
-      this.selectedWordIndex = changes.question.currentValue.selectedWordIndex;
-      console.log('ngOnChanges- : ', changes.question.currentValue);
-    }
+  }
+
+  showCheckAnswer() {
+    this.showAnswerChecker = true;
+  }
+  hideCheckAnswer() {
+    this.showAnswerChecker = false;
   }
 
 }

@@ -21,6 +21,9 @@ export class QuizQuestionComponent implements OnInit {
   selectedQuestionIndex: number = 0;
   selectedAnswereIndex: number = 0;
   isReQuiz: boolean = false;
+  isChangeCardOn: boolean = false;
+
+  @ViewChild(QuizCardComponent) quizCardComponent : QuizCardComponent;
 
   // constructor() { }
   constructor(
@@ -41,12 +44,6 @@ export class QuizQuestionComponent implements OnInit {
     } else {
       await this.loadQuiz();
     }
-    
-    this.quizService.currentAnswer.subscribe( answer => {
-      this.selectedAnswereIndex = answer;
-      this.changeCurrentQuestionInfo(this.selectedAnswereIndex);
-      console.log('this.quizService.currentAnswer - ', answer, this.selectedQuestion);
-    });
   }
 
   loadReQuiz() {
@@ -65,17 +62,31 @@ export class QuizQuestionComponent implements OnInit {
     this.selectedQuestion = this.questions[--this.selectedQuestionIndex];
   }
   onClickNext() {
+    this.isChangeCardOn = true;
     this.setSelectedAnswerIndex();
-    this.selectedQuestion = this.questions[++this.selectedQuestionIndex];
+    this.quizCardComponent.showCheckAnswer();
+    setTimeout( ()=>{
+      this.selectedQuestion = this.questions[++this.selectedQuestionIndex];
+      this.quizCardComponent.hideCheckAnswer();
+      this.isChangeCardOn = false;
+    }, 1000);
   }
   onClickScore() {
     this.setSelectedAnswerIndex();
+    this.quizCardComponent.showCheckAnswer();
     this.quizService.setQuizResult = this.questions;
+    setTimeout( ()=> {
+      this.router.navigate(['../score'], { relativeTo: this.activatedRoute});
+      this.quizCardComponent.hideCheckAnswer();
+    }, 1000);
+  }
 
-    this.router.navigate(['../score'], { relativeTo: this.activatedRoute});
+  onClickTestChecker() {
+    this.quizCardComponent.showCheckAnswer();
   }
   
   private setSelectedAnswerIndex () {
+    this.selectedAnswereIndex = this.quizCardComponent.selectedWordIndex;
     if( !this.selectedAnswereIndex )
       this.selectedAnswereIndex = 0;
     this.questions[this.selectedQuestionIndex].selectedWordIndex = this.selectedAnswereIndex;

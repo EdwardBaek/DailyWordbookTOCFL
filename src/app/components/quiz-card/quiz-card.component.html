@@ -9,10 +9,12 @@
         class="card card-answer mb-3 px-3 py-2 card-shadow card-effect-hover"  
         *ngFor="let answer of question.answers" 
         (click)="onClickAnswer(answer.index)"
-        [class.active]="selectedWordIndex === answer.index"
+        [class.incorrect]="showAnswerChecker && ( selectedWordIndex === answer.index ) && ( question.questionWord.index != answer.index )"
+        [class.correct]=" showAnswerChecker && ( question.questionWord.index == answer.index )"
+        [class.active]=" !showAnswerChecker && ( selectedWordIndex === answer.index )"
       >
         <p class="card-text">
-          {{ answer.explain }}
+          {{ answer.class }} {{ answer.explain }}
         </p>
       </div>
     </div>
