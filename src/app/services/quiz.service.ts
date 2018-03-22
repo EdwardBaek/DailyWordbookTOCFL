@@ -94,7 +94,8 @@ export class QuizService {
       let question: Question = {
         index: i+1,
         questionWord: this.wordList[i],
-        answers: this.fakeAnswers[i]
+        answers: this.fakeAnswers[i],
+        isAnswerCorrect: undefined
       }
       // console.log( 'questions'+i, question );
       this.questions[i] = question;
@@ -119,11 +120,14 @@ export class QuizService {
     let correctArray: any[] = [];
     let incorrectArray: any[] = [];
 
+    console.log( this.quizResult);
     this.quizResult.forEach( (cur, inx) => {
       if ( cur.isAnswerCorrect != undefined ){
-        if( cur.isAnswerCorrect == true ){
+        if( cur.isAnswerCorrect ){
           score++;
           correctArray.push(cur.questionWord);
+        } else {
+          incorrectArray.push(cur.questionWord);
         }
       } else if( cur.selectedWordIndex == cur.questionWord.index ){
           score++;

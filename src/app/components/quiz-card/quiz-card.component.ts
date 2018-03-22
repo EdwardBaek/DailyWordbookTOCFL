@@ -11,6 +11,9 @@ export class QuizCardComponent implements OnInit {
   @Input('question') question: Question;
   selectedWordIndex: number = 0;
   showAnswerChecker: boolean = false;
+  isSelectedAnswerCorrect: boolean = false;
+
+  isSoundVisibility: boolean = false;
 
   constructor(private quizService: QuizService) { }
 
@@ -23,16 +26,31 @@ export class QuizCardComponent implements OnInit {
     else
       this.selectedWordIndex = 0;
 
-    console.log('onClickAnswer : ', this.selectedWordIndex);
+    if( this.selectedWordIndex == this.question.questionWord.index )
+      this.isSelectedAnswerCorrect = true;
+    else 
+      this.isSelectedAnswerCorrect = false;
+
+    console.log('onClickAnswer : ', this.selectedWordIndex, this.isSelectedAnswerCorrect );
   }
   ngOnChanges(changes: SimpleChanges) {
   }
 
+  resetData() {
+    this.selectedWordIndex = 0;
+    this.showAnswerChecker = false;
+    this.isSelectedAnswerCorrect = false;
+    this.isSoundVisibility = false;
+  }
   showCheckAnswer() {
     this.showAnswerChecker = true;
   }
   hideCheckAnswer() {
     this.showAnswerChecker = false;
+  }
+
+  onClickShowHideHint() {
+    this.isSoundVisibility = !this.isSoundVisibility;
   }
 
 }

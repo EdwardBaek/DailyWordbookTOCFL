@@ -17,11 +17,16 @@ import { QuizScoreComponent } from '../quiz-score/quiz-score.component';
 export class QuizQuestionComponent implements OnInit {
   words: Word[];
   questions: Question[] = [];
+
+  isReQuiz: boolean = false;
   selectedQuestion: Question;
   selectedQuestionIndex: number = 0;
   selectedAnswereIndex: number = 0;
-  isReQuiz: boolean = false;
+
+  isSelectedAnswerCorrect: boolean = false;
   isChangeCardOn: boolean = false;
+
+  isCheckAnswer: boolean = false;
 
   @ViewChild(QuizCardComponent) quizCardComponent : QuizCardComponent;
 
@@ -48,48 +53,60 @@ export class QuizQuestionComponent implements OnInit {
 
   loadReQuiz() {
     this.questions = this.quizService.getQuestions;
-    console.log('loadReQuiz-questions',this.questions);
     this.selectedQuestion = this.questions[this.selectedQuestionIndex];
   }
 
   async loadQuiz() {
     this.questions = await this.quizService.getNewQuestions();
     this.selectedQuestion = this.questions[this.selectedQuestionIndex];
-    console.log('loadQuiz-questions',this.questions);
   }
 
-  onClickPrevious() {
-    this.selectedQuestion = this.questions[--this.selectedQuestionIndex];
-  }
   onClickNext() {
     this.isChangeCardOn = true;
+    this.isCheckAnswer = true;
     this.setSelectedAnswerIndex();
+    this.setIsAnswerCorrect();
     this.quizCardComponent.showCheckAnswer();
+    console.log( 'this.isSelectedAnswerCorrect', this.isSelectedAnswerCorrect );
+
     setTimeout( ()=>{
+      this.resetStatusAndSelectedData();
+      this.quizCardComponent.resetData();
       this.selectedQuestion = this.questions[++this.selectedQuestionIndex];
-      this.quizCardComponent.hideCheckAnswer();
-      this.isChangeCardOn = false;
+      console.log( 'this.isSelectedAnswerCorrect', this.isSelectedAnswerCorrect );
     }, 1000);
   }
+
+  resetStatusAndSelectedData() {
+    this.isChangeCardOn = false;
+    this.isCheckAnswer = false;
+    this.isSelectedAnswerCorrect = false;
+
+  }
+
   onClickScore() {
+    this.isCheckAnswer = true;
     this.setSelectedAnswerIndex();
+    this.setIsAnswerCorrect();
     this.quizCardComponent.showCheckAnswer();
     this.quizService.setQuizResult = this.questions;
     setTimeout( ()=> {
       this.router.navigate(['../score'], { relativeTo: this.activatedRoute});
       this.quizCardComponent.hideCheckAnswer();
+      this.isCheckAnswer = false;
     }, 1000);
   }
 
-  onClickTestChecker() {
-    this.quizCardComponent.showCheckAnswer();
-  }
-  
+
   private setSelectedAnswerIndex () {
     this.selectedAnswereIndex = this.quizCardComponent.selectedWordIndex;
     if( !this.selectedAnswereIndex )
       this.selectedAnswereIndex = 0;
     this.questions[this.selectedQuestionIndex].selectedWordIndex = this.selectedAnswereIndex;
+  }
+  private setIsAnswerCorrect() {
+    this.isSelectedAnswerCorrect = this.quizCardComponent.isSelectedAnswerCorrect;
+    this.questions[this.selectedQuestionIndex].isAnswerCorrect = this.isSelectedAnswerCorrect;
   }
   private changeCurrentQuestionInfo(answer: number) {
     this.questions[this.selectedQuestionIndex].selectedWordIndex = answer;

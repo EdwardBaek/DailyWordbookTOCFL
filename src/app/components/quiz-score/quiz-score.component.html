@@ -10,11 +10,11 @@
       <hr>
       <div class="row">
         <div class="col text-center">
-          <h4><i class="fa fa-check-circle" style="color:limegreen"></i></h4>
+          <h4><i class="fa fa-check-circle color-correct"></i></h4>
           <div class="card mb-2 py-2" *ngFor="let data of quizScore.correctAnsweredWords" >{{ data.word }}</div>
         </div>
         <div class="col text-center">
-          <h4><i class="fa fa-times-circle" style="color:crimson"></i></h4>
+          <h4><i class="fa fa-times-circle color-incorrect"></i></h4>
           <div class="card mb-2 py-2" *ngFor="let data of quizScore.incorrectAnsweredWords" >{{ data.word }}</div>
         </div>
       </div>

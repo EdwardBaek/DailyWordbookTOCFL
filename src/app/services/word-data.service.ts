@@ -81,8 +81,11 @@ export class WordDataService {
   async getWordDataFromNetworkSlowly(level: number): Promise<any> {
     console.log('>>>try load data from network');
     await new Promise<any[]>(resolve =>
-      setTimeout(resolve, 2000));
+      setTimeout(resolve, this.getRandomNumber(2000, 10000)));
     return await this.getWordDataFromNetwork(level);
+  }
+  private getRandomNumber(min: number, max: number) :number {
+    return Math.floor( Math.random() * (max - min) + min);
   }
 
   getWordDataFromLocalStorage(level: number): any[] {

@@ -1,19 +1,43 @@
 <div *ngIf="selectedQuestion">
-  <button class="btn btn-primary btn-block" (click)="onClickTestChecker()">Test Checker</button>
+  <!-- Start Quiz Result List -->
+  <div class="text-center">
+    <div *ngFor="let question of questions" class="float-left mx-1">
+      <div *ngIf="( question.index < selectedQuestionIndex + 1 )">
+        <!-- Passed -->
+        <i class="fa fa-check-circle color-correct" *ngIf="question.isAnswerCorrect"></i>
+        <i class="fa fa-times-circle color-incorrect" *ngIf="!question.isAnswerCorrect"></i>
+      </div>
+      <h3 *ngIf="( question.index == selectedQuestionIndex + 1 )">
+        <!-- ON -->
+        <div *ngIf="!isCheckAnswer">
+          <i class="fa fa-circle color-inactive"></i>
+        </div>
+        <div *ngIf="isCheckAnswer">
+          <i class="fa fa-check-circle color-correct" *ngIf="isSelectedAnswerCorrect"></i>
+          <i class="fa fa-times-circle color-incorrect" *ngIf="!isSelectedAnswerCorrect"></i>
+        </div>
+      </h3>
+      <div *ngIf="( question.index > selectedQuestionIndex +1 )">
+        <!-- Ready -->
+        <i class="fa fa-circle color-inactive"></i>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div> 
+  <!-- End Quiz Result List -->
 
-  <div> {{ selectedQuestionIndex + 1 }} / {{ questions.length }} </div>
   <app-quiz-card [question]="selectedQuestion"></app-quiz-card>
   
+  <!-- Start Control Buttons -->
   <div>
-    <!-- <button class="btn btn-primary" [disabled]="selectedQuestionIndex +1 < 2" (click)="onClickPrevious()">Pre</button> -->
     <button class="btn btn-primary btn-block" (click)="onClickNext()" [disabled]=" ( questions.length == selectedQuestionIndex +1) || ( isChangeCardOn )">Next</button>
     <button class="btn btn-primary btn-block" *ngIf="questions.length == selectedQuestionIndex +1" (click)="onClickScore()" [disabled]=" isChangeCardOn " >Score</button>
   </div>
+  <!-- End Control Buttons -->
 </div>
 
+<!-- Exception -->
 <div *ngIf="!selectedQuestion">
-  <p>No Data</p>
+  <p>Now Loading Data...</p>
   <button class="btn btn-primary btn-block" routerLink="/">Go to Main</button>
 </div>
-
-<!-- <button class="btn btn-primary btn-block" routerLink="/quiz/re/question">Re:Quiz</button> -->

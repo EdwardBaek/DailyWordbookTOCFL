@@ -2,9 +2,11 @@
   <div class="card card-body">
     <!-- Start Question -->
     <div *ngIf="question && question.questionWord && question.questionWord.word">
-      <h3 class="card-title text-center mb-4">
+      <span class="badge badge-right-top badge-light p-1" (click)="onClickShowHideHint()">Hint</span>
+      <h3 class="card-title text-center mt-4">
         {{ question.questionWord.word }}
       </h3>
+      <p class="card-title text-center mb-4" [class.visibility-hidden]="!isSoundVisibility" >[{{ question.questionWord.sound }}]</p>
       <div 
         class="card card-answer mb-3 px-3 py-2 card-shadow card-effect-hover"  
         *ngFor="let answer of question.answers" 

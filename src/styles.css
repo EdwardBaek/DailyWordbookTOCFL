@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+.color-correct {
+  /* limegreen */
+  color:#32cd32;
+}
+.color-incorrect {
+  /* crimson */
+  color:#ed143d;
+}
+.color-inactive {
+  color:#e9ecef;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
