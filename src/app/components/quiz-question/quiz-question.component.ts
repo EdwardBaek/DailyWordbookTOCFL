@@ -45,14 +45,15 @@ export class QuizQuestionComponent implements OnInit {
 
   async ngOnInit(){
     if ( this.isReQuiz ) {
-      this.loadReQuiz();
+      await this.loadReQuiz();
     } else {
       await this.loadQuiz();
     }
+    console.log('this.questions', this.questions);
   }
 
-  loadReQuiz() {
-    this.questions = this.quizService.getQuestions;
+  async loadReQuiz() {
+    this.questions = await this.quizService.getReQuestions();
     this.selectedQuestion = this.questions[this.selectedQuestionIndex];
   }
 
@@ -72,8 +73,9 @@ export class QuizQuestionComponent implements OnInit {
     setTimeout( ()=>{
       this.resetStatusAndSelectedData();
       this.quizCardComponent.resetData();
+
       this.selectedQuestion = this.questions[++this.selectedQuestionIndex];
-      console.log( 'this.isSelectedAnswerCorrect', this.isSelectedAnswerCorrect );
+      // console.log( 'this.isSelectedAnswerCorrect', this.isSelectedAnswerCorrect );
     }, 1000);
   }
 

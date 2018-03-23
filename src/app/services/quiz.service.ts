@@ -3,14 +3,12 @@ import { Word } from '../models/Word';
 import { Question } from '../models/Question';
 import { WordDataService } from '../services/word-data.service';
 import { forEach } from '@angular/router/src/utils/collection';
-import { BehaviorSubject  } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class QuizService {
   leftWords: Word[];
-  questions: Question[];
   wordList: Word[];
-  fakeAnswers: any[];
+  questions: Question[];
   quizResult: Question[];
   scoreData: any = {
     socre: 0,
@@ -20,11 +18,6 @@ export class QuizService {
     correctAnsweredWords : [],
     incorrectAnsweredWords : []
   };
-  // Quiz onWorking Data
-  selectedAnswerWordIndex: number;
-
-  private currentAnswerSource = new BehaviorSubject<number>(0);
-  currentAnswer = this.currentAnswerSource.asObservable();
 
   // Set Defualt value
   option: any = {
@@ -32,19 +25,13 @@ export class QuizService {
     number: 5
   };
 
-
   constructor(private wordDataService: WordDataService) {
     console.log('>>>quizService is initailized.');
   }
-  
-  changeAnswer(answer: number) {
-    this.currentAnswerSource.next(answer);
-  }
 
   resetData() {
-    this.questions = [];
-    this.wordList = [];
-    this.fakeAnswers = [];
+    this.questions = undefined;
+    this.wordList = undefined;
   }
   set setOption(option) {
     this.option = option;
@@ -59,51 +46,47 @@ export class QuizService {
     return this.getCopyArray(this.quizResult);
   }
   
-  set setSelectedAnswerWordIndex(selectedAnswerWordIndex: number) {
-    this.selectedAnswerWordIndex = selectedAnswerWordIndex;
-  }
-  get getSelectedAnswerWordIndex() {
-    return this.selectedAnswerWordIndex;
-  }
-  
-  get getQuestions() {
-    this.changeAnswer(0);
-    return this.getCopyArray(this.questions);
+  async getReQuestions() {
+    return await this.createQuestion();
   }
   async getNewQuestions() {
-    this.changeAnswer(0);
-    return this.getNewQuestionsWithOption(this.option);
+    this.resetData();
+    return await this.createQuestion();
   }
 
-  async getNewQuestionsWithOption(option:{level:number, number:number}):Promise<Question[]> {
-    if(!option) option = this.option;
-    this.resetData();
+  async createQuestion():Promise<Question[]> {
     // initial Data
-    let wordData = await this.wordDataService.getWordList(option.level);
-    this.questions = new Array(option.number);
-    this.wordList = this.getRandomWordsData(wordData, option.number);
-    this.fakeAnswers = this.getRandomIcorrectAnswerData(wordData, this.wordList);
-    // console.log('wordData',wordData);
-    // console.log( 'answers', answers );
-    // console.log( 'incorrectAnswers', incorrectAnswers );
-    // console.log( 'questions' , questions);
-    // console.log( 'questions.length' , questions.length);
+    let wordData = await this.wordDataService.getWordList(this.option.level);
+    this.questions = new Array(this.option.number);
+    this.wordList = ( this.wordList ) ? this.wordList : this.getRandomWordsData(wordData, this.option.number);
+    let fakeAnswers = this.getRandomIcorrectAnswerData(wordData, this.wordList);
+
+    // console.log('wordData', wordData);
+    // console.log( 'questions' , this.questions);
+    // console.log( 'wordList', this.wordList );
+    // console.log( 'fakeAnswers', fakeAnswers );
+    // console.log( 'questions.length' , this.questions.length);
+    
+    let returnResult = this.getCopyArray(this.questions);
 
     for( var i=0; i < this.questions.length; i++) {
       // console.log('questions', i+1);
+      let answers = this.getCopyArray( fakeAnswers[i] );
+      answers.splice( this.getRandomInteger(answers.length), 0, this.wordList[i]);
       let question: Question = {
         index: i+1,
         questionWord: this.wordList[i],
-        answers: this.fakeAnswers[i],
+        answers: answers,
+        selectedWordIndex: undefined,
         isAnswerCorrect: undefined
       }
       // console.log( 'questions'+i, question );
-      this.questions[i] = question;
+      returnResult[i] = question;
     }
 
-    // console.log( 'questions', questions );
+    console.log( 'questions', this.questions );
     // let returnResult = this.questions.slice();
-    // console.log('returnResult', returnResult);
+    console.log('returnResult', returnResult);
     // console.log('this.questions', this.questions);
     return this.getCopyArray(this.questions);
   }
@@ -180,7 +163,7 @@ export class QuizService {
         tempArray.push(tempWord);
         tempWordData.splice(tempIndex, 1);
       }
-      tempArray.splice(this.getRandomInteger(answerNum-1), 0, cur);
+      // tempArray.splice( this.getRandomInteger(answerNum+1), 0, cur);
       answerArray.push(tempArray);
       tempWordData = [];
       tempIndex = '';
@@ -203,9 +186,8 @@ export class QuizService {
     return false;
   }
   private getCopyArray(originArray){
-    // let cloned = originArray ? originArray.slice() : null;
-    let cloned = originArray.map(x => Object.assign({}, x));
+    let cloned = originArray ? originArray.slice() : null;
+    // let cloned = originArray.map(x => Object.assign({}, x));
     return cloned;
   }
-
 }

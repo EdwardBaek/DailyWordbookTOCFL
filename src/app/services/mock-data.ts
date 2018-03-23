@@ -1021,3 +1021,56 @@ export const MOCK_QUIZ_RESULT =
       "selectedWordIndex":0
     },
   ]
+
+
+export const MOCK_QUIZ_SCORE = 
+{  
+    "score":3,
+    "totalWords":5,
+    "date":"2018-03-22T10:22:51.079Z",
+    "level":3,
+    "correctAnsweredWords":[  
+      {  
+        "index":92,
+        "word":"袋",
+        "sound":"dài",
+        "level":"Level 3",
+        "class":"(M)",
+        "explain":"container measure word for things in a bag or a sack"
+      },
+      {  
+        "index":78,
+        "word":"串",
+        "sound":"chuàn",
+        "level":"Level 3",
+        "class":"(M)",
+        "explain":"collective measure word for something of the same kind or attached closely together"
+      },
+      {  
+        "index":36,
+        "word":"表演",
+        "sound":"biǎoyǎn",
+        "level":"Level 3",
+        "class":"(VA)",
+        "explain":"to perform, act, play, demonstrate"
+      }
+    ],
+    "incorrectAnsweredWords":[  
+      {  
+        "index":255,
+        "word":"建設",
+        "sound":"jiànshè",
+        "level":"Level 3",
+        "class":"(N)",
+        "explain":"construction"
+      },
+      {  
+        "index":228,
+        "word":"回答",
+        "sound":"huídá",
+        "level":"Level 3",
+        "class":"(N)",
+        "explain":"answer, reply"
+      }
+    ]
+  }

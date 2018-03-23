@@ -8,7 +8,8 @@ import {
   MOCK_WORD_DATA_LEVEL_4, 
   MOCK_WORD_DATA_LEVEL_5,
   MOCK_SAMPLE_WORD_DATA,
-  MOCK_QUIZ_RESULT 
+  MOCK_QUIZ_RESULT,
+  MOCK_QUIZ_SCORE 
 } from './mock-data'
 
 const WORDS_DATA: any[] = [
@@ -34,5 +35,8 @@ export class MockDataService {
 
   getMockQuizResult() {
     return MOCK_QUIZ_RESULT;
+  }
+  getMockQuizScore() {
+    return MOCK_QUIZ_SCORE
   }
 }

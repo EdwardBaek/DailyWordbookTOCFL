@@ -20,9 +20,11 @@ export class QuizScoreComponent implements OnInit {
 
   ngOnInit() {
     // For test
-    // if( !this.quizService.getQuizResult )
-    //   this.quizService.setQuizResult = this.mockDataService.getMockQuizResult();
-    this.quizScore = this.quizService.getScore;
+    if( !this.quizService.getQuizResult )
+      this.quizScore = this.mockDataService.getMockQuizScore();
+    else
+      this.quizScore = this.quizService.getScore;
+
     console.log( 'this.quizScore', this.quizScore );
   }
 
@@ -30,4 +32,5 @@ export class QuizScoreComponent implements OnInit {
     this.router.navigate([
       '../../re/question'], { relativeTo: this.activatedRoute });
   }
+  
 }
