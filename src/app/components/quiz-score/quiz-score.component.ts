@@ -28,6 +28,7 @@ export class QuizScoreComponent implements OnInit {
     console.log( 'this.quizScore', this.quizScore );
   }
 
+  /*** Private Method ***/
   private goReQuiz() {
     this.router.navigate([
       '../../re/question'], { relativeTo: this.activatedRoute });

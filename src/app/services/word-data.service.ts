@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import { of } from 'rxjs/observable/of';  
+import { UtilService } from './util.service';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -21,8 +22,12 @@ export class WordDataService {
   wordDataVersion: string;
   selectedLevel: number = 1;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private utilService: UtilService
+  ) { }
 
+  /*** Method ***/
   async getWordList(level: number){
     let wordList = this.getWordDataByLevel(level);
     this.selectedLevel = level;
@@ -30,28 +35,32 @@ export class WordDataService {
     console.log('>>>try load data from memory');
     if(wordList && wordList.length > 0) {
       console.log('>>>Data from memory', wordList);
-      return this.returnNewArray(wordList);
+      return this.getCopyArray(wordList);
     }
 
     wordList = this.getWordDataFromLocalStorage(level);
     if(wordList && wordList.length > 0) {
       console.log('>>>Data from localStorage', wordList);
-      return this.returnNewArray(wordList);
+      return this.getCopyArray(wordList);
     }
     
     let responsedData = await this.getWordDataFromNetwork(level);
+    // For Test
     // let responsedData = await this.getWordDataFromNetworkSlowly(level);
     console.log('>>>Data Level -' + level, responsedData.data);
     
     this.setWordDataByLevel(level, responsedData.data);
     this.setWordDataToLocalStorage(level, responsedData.data);
 
-    return this.returnNewArray(responsedData.data);
+    return this.getCopyArray(responsedData.data);
   }
 
-  private returnNewArray(array): any[] {
-    return array.slice();
+  /*** Set Method from Util Service ***/
+  private getCopyArray(originArray): any[] {
+    return this.utilService.getCopyArray(originArray);
   }
+
+  /*** Private Method ***/
   private getWordListDataUrlByLevel(level:number): string {
     if(!level) level = 1;
     return 'assets/data/level' + level + '.json';
@@ -65,7 +74,7 @@ export class WordDataService {
     return this.wordData['level'+level] = wordList;
   }
 
-  async getWordDataFromNetwork(level: number): Promise<any> {
+  private async getWordDataFromNetwork(level: number): Promise<any> {
     console.log('>>>try load data from network');
     try {
       let response = await this.http
@@ -78,7 +87,7 @@ export class WordDataService {
   }
   
   // For delay test
-  async getWordDataFromNetworkSlowly(level: number): Promise<any> {
+  private async getWordDataFromNetworkSlowly(level: number): Promise<any> {
     console.log('>>>try load data from network');
     await new Promise<any[]>(resolve =>
       setTimeout(resolve, this.getRandomNumber(2000, 10000)));
@@ -88,7 +97,7 @@ export class WordDataService {
     return Math.floor( Math.random() * (max - min) + min);
   }
 
-  getWordDataFromLocalStorage(level: number): any[] {
+  private getWordDataFromLocalStorage(level: number): any[] {
     console.log('>>>try load data from localStorage');
     let data = JSON.parse(localStorage.getItem(this.getLocalStorageItemName(level)));
     if(data != null) {
@@ -97,11 +106,11 @@ export class WordDataService {
     }
     return [];
   }
-  setWordDataToLocalStorage(level: number, data: any[]) {
+  private setWordDataToLocalStorage(level: number, data: any[]) {
     localStorage.setItem(this.getLocalStorageItemName(level), JSON.stringify(data));
   }
   
-  getLocalStorageItemName(level: number): string {
+  private getLocalStorageItemName(level: number): string {
     return 'wordDataLevel' + level;
   }
 

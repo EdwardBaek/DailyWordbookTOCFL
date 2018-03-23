@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -8,29 +9,29 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { WordListComponent } from './components/word-list/word-list.component';
-import { QuizSettingComponent } from './components/quiz-setting/quiz-setting.component';
+import { WordCardSettingComponent } from './components/word-card-setting/word-card-setting.component';
+import { WordCardComponent } from './components/word-card/word-card.component';
 import { QuizComponent } from './components/quiz/quiz.component';
+import { QuizSettingComponent } from './components/quiz-setting/quiz-setting.component';
+import { QuizQuestionComponent } from './components/quiz-question/quiz-question.component';
+import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 import { QuizScoreComponent } from './components/quiz-score/quiz-score.component';
 import { RecordListComponent } from './components/record-list/record-list.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 // Services
+import { UtilService } from './services/util.service';
 import { WordDataService } from './services/word-data.service';
 import { QuizService } from './services/quiz.service';
+import { SettingService } from './services/setting.service';
+import { MockDataService } from './services/mock-data.service';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
-import { QuizQuestionComponent } from './components/quiz-question/quiz-question.component';
-import { FormsModule } from '@angular/forms';
-import { SettingService } from './services/setting.service';
-import { WordCardComponent } from './components/word-card/word-card.component';
-import { WordCardSettingComponent } from './components/word-card-setting/word-card-setting.component';
 
 // For Animation
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MockDataService } from './services/mock-data.service';
-import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [WordDataService, QuizService, SettingService, MockDataService],
+  providers: [WordDataService, QuizService, SettingService, MockDataService, UtilService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
