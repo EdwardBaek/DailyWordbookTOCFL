@@ -46,8 +46,10 @@ export class UtilService {
   
   // Array
   getCopyArray(originArray){
-    let cloned = originArray ? originArray.slice() : null;
-    // let cloned = originArray.map(x => Object.assign({}, x));
+    // ES5 Recommended
+    const cloned = originArray ? originArray.slice() : null;
+    // ES6 Recommneded
+    // const cloned = originArray ? [...originArray] : null;
     return cloned;
   }
   hasInputValueInArray(array: any[], value) :boolean {

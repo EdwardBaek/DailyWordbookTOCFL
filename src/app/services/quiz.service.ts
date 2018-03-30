@@ -7,29 +7,17 @@ import { UtilService } from './util.service';
 
 @Injectable()
 export class QuizService {
-  leftWords: Word[];
-  questionWords: Word[];
-  questions: Question[];
-  quizResult: Question[];
-  scoreData: any = {
-    socre: 0,
-    totalWords:  5,
-    level: 1,
-    date: 'date',
-    correctAnsweredWords : [],
-    incorrectAnsweredWords : []
-  };
-
-  // Set Defualt value
-  option: any = {
-    level: 1,
-    number: 5
-  };
+  private option: any;
+  private questions: Question[];
+  private questionWords: Word[];
+  private quizResult: Question[];
+  private scoreData: any;
 
   constructor(
     private wordDataService: WordDataService,
     private utilService: UtilService
   ) {
+    this.init();
   }
 
   /*
@@ -42,11 +30,38 @@ export class QuizService {
    */
 
   /*** Method ***/  
+  init() {
+    this.scoreData = {
+      socre: 0,
+      totalWords:  5,
+      level: 1,
+      date: new Date(),
+      correctAnsweredWords : [],
+      incorrectAnsweredWords : []
+    };
+    this.option = {
+      level: 1,
+      number: 5
+    };
+  }
+  resetData() {
+    this.questions = undefined;
+    this.questionWords = undefined;
+    this.quizResult = undefined;
+    this.init();
+  }
+
   set setOption(option) {
     this.option = option;
   }
   get getOption() {
     return this.option;
+  }
+  set setQuestionWords(questionWords) {
+    this.questionWords = questionWords;
+  }
+  get getQuestionWords() {
+    return this.questionWords;
   }
   async getReQuestions() {
     return await this.createQuestion();
@@ -62,11 +77,11 @@ export class QuizService {
     return this.getCopyArray(this.quizResult);
   }
   get getScore() {
-    if( !this.quizResult )
-      return undefined;
+    if( !this.quizResult ) return null;
     this.createScore();
     return this.scoreData;
   }
+  
 
   /*** Set Method from Util Service ***/ 
   private getCopyArray(originArray) {
@@ -80,10 +95,6 @@ export class QuizService {
   }
 
   /*** Private Method ***/
-  private resetData() {
-    this.questions = undefined;
-    this.questionWords = undefined;
-  }
   private async createQuestion():Promise<Question[]> {
     // initial Data
     let wordData = await this.wordDataService.getWordList(this.option.level);

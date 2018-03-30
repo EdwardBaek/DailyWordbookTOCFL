@@ -58,6 +58,7 @@ export class WordDataService {
   /*** Set Method from Util Service ***/
   private getCopyArray(originArray): any[] {
     return this.utilService.getCopyArray(originArray);
+    // return originArray.slice();
   }
 
   /*** Private Method ***/
@@ -74,7 +75,7 @@ export class WordDataService {
     return this.wordData['level'+level] = wordList;
   }
 
-  private async getWordDataFromNetwork(level: number): Promise<any> {
+  async getWordDataFromNetwork(level: number): Promise<any> {
     console.log('>>>try load data from network');
     try {
       let response = await this.http
@@ -84,6 +85,13 @@ export class WordDataService {
     } catch (error) {
       await this.handleError(error);
     }
+  }
+
+  getTestValue(param: any): any{
+    return param;
+  }
+  getTestHttp<T>(level: number) {
+    return this.http.get<T>(this.getWordListDataUrlByLevel(level));
   }
   
   // For delay test

@@ -28,15 +28,13 @@ export class MockDataService {
   getMocSamplekWordDataByLevel(level:number): Word {
     return MOCK_SAMPLE_WORD_DATA[ level -1 ];
   }
-
   getMockWordsDataByLevel(level: number): Word[] {
     return WORDS_DATA[level - 1];
   }
-
-  getMockQuizResult() {
+  get getMockQuizResult() {
     return MOCK_QUIZ_RESULT;
   }
-  getMockQuizScore() {
+  get getMockQuizScore() {
     return MOCK_QUIZ_SCORE
   }
 }

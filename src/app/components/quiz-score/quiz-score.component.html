@@ -11,11 +11,15 @@
       <div class="row">
         <div class="col text-center">
           <h4><i class="fa fa-check-circle color-correct"></i></h4>
-          <div class="card mb-2 py-2" *ngFor="let data of quizScore.correctAnsweredWords" >{{ data.word }}</div>
+          <div class="card mb-2 py-2" *ngFor="let data of quizScore.correctAnsweredWords" >
+            <h5 class="card-title">{{ data.word }}</h5>
+          </div>
         </div>
         <div class="col text-center">
           <h4><i class="fa fa-times-circle color-incorrect"></i></h4>
-          <div class="card mb-2 py-2" *ngFor="let data of quizScore.incorrectAnsweredWords" >{{ data.word }}</div>
+          <div class="card mb-2 py-2" *ngFor="let data of quizScore.incorrectAnsweredWords" >
+            <h5 class="card-title">{{ data.word }}</h5>
+          </div>
         </div>
       </div>
     </div>

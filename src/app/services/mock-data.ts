@@ -926,26 +926,353 @@ export interface Question {
     questionWord : Word;
     answers: Word[];
 }
+
+export const MOCK_QUIZ_QUESTION_WORDS = 
+[  
+    {  
+      "index":42,
+      "word":"難",
+      "sound":"nán",
+      "level":"Level 1",
+      "class":"(VS)",
+      "explain":"to be difficult"
+    },
+    {  
+      "index":307,
+      "word":"最",
+      "sound":"zuì",
+      "level":"Level 1",
+      "class":"(Adv)",
+      "explain":"the most, -est"
+    },
+    {  
+      "index":491,
+      "word":"(飛)機場",
+      "sound":"(fēi)jīchǎng",
+      "level":"Level 1",
+      "class":"(N)",
+      "explain":"airport"
+    },
+    {  
+      "index":236,
+      "word":"每",
+      "sound":"měi",
+      "level":"Level 1",
+      "class":"(Det)",
+      "explain":"every"
+    },
+    {  
+      "index":124,
+      "word":"漂亮",
+      "sound":"piāoliàng",
+      "level":"Level 1",
+      "class":"(VS)",
+      "explain":"to be beautiful, to be pretty"
+    }
+];
+export const MOCK_QUIZ_QUESTIONS = 
+[  
+    {  
+        "index":1,
+        "questionWord":{  
+        "index":302,
+        "word":"回來",
+        "sound":"huílái",
+        "level":"Level 1",
+        "class":"(VA)",
+        "explain":"to come back"
+        },
+        "answers":[  
+        {  
+            "index":165,
+            "word":"一起",
+            "sound":"yìqǐ",
+            "level":"Level 1",
+            "class":"(Adv)",
+            "explain":"together"
+        },
+        {  
+            "index":302,
+            "word":"回來",
+            "sound":"huílái",
+            "level":"Level 1",
+            "class":"(VA)",
+            "explain":"to come back"
+        },
+        {  
+            "index":90,
+            "word":"告訴",
+            "sound":"gàosù",
+            "level":"Level 1",
+            "class":"(VA)",
+            "explain":"to tell, to inform"
+        },
+        {  
+            "index":166,
+            "word":"小時",
+            "sound":"xiǎoshí",
+            "level":"Level 1",
+            "class":"(N)",
+            "explain":"hour"
+        }
+        ]
+    },
+    {  
+        "index":2,
+        "questionWord":{  
+        "index":57,
+        "word":"洗澡",
+        "sound":"xǐzǎo",
+        "level":"Level 1",
+        "class":"(VA)",
+        "explain":"to take a bath or shower"
+        },
+        "answers":[  
+        {  
+            "index":57,
+            "word":"洗澡",
+            "sound":"xǐzǎo",
+            "level":"Level 1",
+            "class":"(VA)",
+            "explain":"to take a bath or shower"
+        },
+        {  
+            "index":140,
+            "word":"山",
+            "sound":"shān",
+            "level":"Level 1",
+            "class":"(N)",
+            "explain":"mountain"
+        },
+        {  
+            "index":348,
+            "word":"手",
+            "sound":"shǒu",
+            "level":"Level 1",
+            "class":"(N)",
+            "explain":"hand"
+        },
+        {  
+            "index":146,
+            "word":"公司",
+            "sound":"gōngsī",
+            "level":"Level 1",
+            "class":"(N)",
+            "explain":"company"
+        }
+        ]
+    },
+    {  
+        "index":3,
+        "questionWord":{  
+        "index":416,
+        "word":"西(邊)",
+        "sound":"xī(biān)",
+        "level":"Level 1",
+        "class":"(N)",
+        "explain":"west"
+        },
+        "answers":[  
+        {  
+            "index":364,
+            "word":"今天",
+            "sound":"jīntiān",
+            "level":"Level 1",
+            "class":"(N)",
+            "explain":"today"
+        },
+        {  
+            "index":114,
+            "word":"家人",
+            "sound":"jiārén",
+            "level":"Level 1",
+            "class":"(N)",
+            "explain":"family members"
+        },
+        {  
+            "index":416,
+            "word":"西(邊)",
+            "sound":"xī(biān)",
+            "level":"Level 1",
+            "class":"(N)",
+            "explain":"west"
+        },
+        {  
+            "index":459,
+            "word":"感冒",
+            "sound":"gǎnmào",
+            "level":"Level 1",
+            "class":"(VS)",
+            "explain":"to have a cold; cold, flu"
+        }
+        ]
+    },
+    {  
+        "index":4,
+        "questionWord":{  
+        "index":14,
+        "word":"酒",
+        "sound":"jiǔ",
+        "level":"Level 1",
+        "class":"(N)",
+        "explain":"wine or liquor"
+        },
+        "answers":[  
+        {  
+            "index":139,
+            "word":"考試",
+            "sound":"kǎoshì",
+            "level":"Level 1",
+            "class":"(VA)",
+            "explain":"to take a test"
+        },
+        {  
+            "index":14,
+            "word":"酒",
+            "sound":"jiǔ",
+            "level":"Level 1",
+            "class":"(N)",
+            "explain":"wine or liquor"
+        },
+        {  
+            "index":367,
+            "word":"吃",
+            "sound":"chī",
+            "level":"Level 1",
+            "class":"(VA)",
+            "explain":"to eat"
+        },
+        {  
+            "index":41,
+            "word":"被",
+            "sound":"bèi",
+            "level":"Level 1",
+            "class":"(Prep)",
+            "explain":"a passive voice indicator"
+        }
+        ]
+    },
+    {  
+        "index":5,
+        "questionWord":{  
+        "index":141,
+        "word":"結束",
+        "sound":"jiéshù",
+        "level":"Level 1",
+        "class":"(VS)",
+        "explain":"to end, close, conclude"
+        },
+        "answers":[  
+        {  
+            "index":30,
+            "word":"教室",
+            "sound":"jiàoshì",
+            "level":"Level 1",
+            "class":"(N)",
+            "explain":"classroom"
+        },
+        {  
+            "index":461,
+            "word":"狗",
+            "sound":"gǒu",
+            "level":"Level 1",
+            "class":"(N)",
+            "explain":"dog"
+        },
+        {  
+            "index":88,
+            "word":"再",
+            "sound":"zài",
+            "level":"Level 1",
+            "class":"(Adv)",
+            "explain":"again, then"
+        },
+        {  
+            "index":141,
+            "word":"結束",
+            "sound":"jiéshù",
+            "level":"Level 1",
+            "class":"(VS)",
+            "explain":"to end, close, conclude"
+        }
+        ]
+    }
+];
 export const MOCK_QUIZ_RESULT = 
 [  
     {  
       "index":1,
       "questionWord":{  
-        "index":497,
-        "word":"更",
-        "sound":"gèng",
+        "index":42,
+        "word":"難",
+        "sound":"nán",
         "level":"Level 1",
-        "class":"(Adv)",
-        "explain":"even more, still more"
+        "class":"(VS)",
+        "explain":"to be difficult"
       },
       "answers":[  
         {  
-          "index":353,
-          "word":"謝謝",
-          "sound":"xièxie",
+          "index":109,
+          "word":"大樓",
+          "sound":"dàlóu",
+          "level":"Level 1",
+          "class":"(N)",
+          "explain":"multi-storied building"
+        },
+        {  
+          "index":162,
+          "word":"便宜",
+          "sound":"piányi",
           "level":"Level 1",
           "class":"(VS)",
-          "explain":"to thanks, to thank you"
+          "explain":"to be cheap"
+        },
+        {  
+          "index":10,
+          "word":"腳踏車/自行車",
+          "sound":"jiǎotàchē/zìxíngchē",
+          "level":"Level 1",
+          "class":"(N)",
+          "explain":"bicycle"
+        },
+        {  
+          "index":42,
+          "word":"難",
+          "sound":"nán",
+          "level":"Level 1",
+          "class":"(VS)",
+          "explain":"to be difficult"
+        }
+      ],
+      "selectedWordIndex":42,
+      "isAnswerCorrect":true
+    },
+    {  
+      "index":2,
+      "questionWord":{  
+        "index":307,
+        "word":"最",
+        "sound":"zuì",
+        "level":"Level 1",
+        "class":"(Adv)",
+        "explain":"the most, -est"
+      },
+      "answers":[  
+        {  
+          "index":314,
+          "word":"好",
+          "sound":"hǎo",
+          "level":"Level 1",
+          "class":"(VS)",
+          "explain":"to be good"
+        },
+        {  
+          "index":103,
+          "word":"上班",
+          "sound":"shàngbān",
+          "level":"Level 1",
+          "class":"(VA)",
+          "explain":"to begin work, to start work, to go to work"
         },
         {  
           "index":497,
@@ -956,121 +1283,208 @@ export const MOCK_QUIZ_RESULT =
           "explain":"even more, still more"
         },
         {  
-          "index":453,
-          "word":"時間",
-          "sound":"shíjiān",
+          "index":307,
+          "word":"最",
+          "sound":"zuì",
           "level":"Level 1",
-          "class":"(N)",
-          "explain":"time"
-        },
-        {  
-          "index":346,
-          "word":"毛",
-          "sound":"máo",
-          "level":"Level 1",
-          "class":"(M)",
-          "explain":"one-tenth of a yuan"
+          "class":"(Adv)",
+          "explain":"the most, -est"
         }
       ],
-      "selectedWordIndex":497
+      "selectedWordIndex":314,
+      "isAnswerCorrect":false
     },
     {  
-      "index":2,
+      "index":3,
       "questionWord":{  
-        "index":169,
-        "word":"學校",
-        "sound":"xuéxiào",
+        "index":491,
+        "word":"(飛)機場",
+        "sound":"(fēi)jīchǎng",
         "level":"Level 1",
         "class":"(N)",
-        "explain":"school"
+        "explain":"airport"
       },
       "answers":[  
         {  
-          "index":97,
-          "word":"是",
-          "sound":"shì",
-          "level":"Level 1",
-          "class":"(SHI)",
-          "explain":"to be(am, are, is)"
-        },
-        {  
-          "index":169,
-          "word":"學校",
-          "sound":"xuéxiào",
+          "index":491,
+          "word":"(飛)機場",
+          "sound":"(fēi)jīchǎng",
           "level":"Level 1",
           "class":"(N)",
-          "explain":"school"
+          "explain":"airport"
         },
         {  
-          "index":113,
-          "word":"畫",
-          "sound":"huà",
+          "index":27,
+          "word":"小姐",
+          "sound":"xiǎojiě",
           "level":"Level 1",
           "class":"(N)",
-          "explain":"drawings, pictures"
+          "explain":"Miss"
         },
         {  
-          "index":277,
-          "word":"弟弟",
-          "sound":"dìdì",
+          "index":184,
+          "word":"有點(兒)",
+          "sound":"yǒudiǎn(ér)",
+          "level":"Level 1",
+          "class":"(Adv)",
+          "explain":"somewhat, rather, a bit"
+        },
+        {  
+          "index":87,
+          "word":"太太",
+          "sound":"tàitài",
           "level":"Level 1",
           "class":"(N)",
-          "explain":"younger brother"
+          "explain":"Mrs, wife"
         }
       ],
-      "selectedWordIndex":0
+      "selectedWordIndex":491,
+      "isAnswerCorrect":true
     },
-  ]
-
+    {  
+      "index":4,
+      "questionWord":{  
+        "index":236,
+        "word":"每",
+        "sound":"měi",
+        "level":"Level 1",
+        "class":"(Det)",
+        "explain":"every"
+      },
+      "answers":[  
+        {  
+          "index":285,
+          "word":"一些",
+          "sound":"yìxiē",
+          "level":"Level 1",
+          "class":"(Det)",
+          "explain":"some"
+        },
+        {  
+          "index":129,
+          "word":"可是",
+          "sound":"kěshì",
+          "level":"Level 1",
+          "class":"(Conj)",
+          "explain":"but, however"
+        },
+        {  
+          "index":236,
+          "word":"每",
+          "sound":"měi",
+          "level":"Level 1",
+          "class":"(Det)",
+          "explain":"every"
+        },
+        {  
+          "index":196,
+          "word":"下雨",
+          "sound":"xiàyǔ",
+          "level":"Level 1",
+          "class":"(VA)",
+          "explain":"to rain"
+        }
+      ],
+      "selectedWordIndex":236,
+      "isAnswerCorrect":true
+    },
+    {  
+      "index":5,
+      "questionWord":{  
+        "index":124,
+        "word":"漂亮",
+        "sound":"piāoliàng",
+        "level":"Level 1",
+        "class":"(VS)",
+        "explain":"to be beautiful, to be pretty"
+      },
+      "answers":[  
+        {  
+          "index":33,
+          "word":"床",
+          "sound":"chuáng",
+          "level":"Level 1",
+          "class":"(N)",
+          "explain":"bed"
+        },
+        {  
+          "index":124,
+          "word":"漂亮",
+          "sound":"piāoliàng",
+          "level":"Level 1",
+          "class":"(VS)",
+          "explain":"to be beautiful, to be pretty"
+        },
+        {  
+          "index":66,
+          "word":"暑假",
+          "sound":"shǔjià",
+          "level":"Level 1",
+          "class":"(N)",
+          "explain":"summer vacation"
+        },
+        {  
+          "index":310,
+          "word":"熱鬧",
+          "sound":"rènào",
+          "level":"Level 1",
+          "class":"(VS)",
+          "explain":"to be lively, to be fun, to be bustling with noise"
+        }
+      ],
+      "selectedWordIndex":33,
+      "isAnswerCorrect":false
+    }
+];
 
 export const MOCK_QUIZ_SCORE = 
 {  
     "score":3,
     "totalWords":5,
-    "date":"2018-03-22T10:22:51.079Z",
-    "level":3,
+    "date":"2018-03-30T06:23:58.009Z",
+    "level":1,
     "correctAnsweredWords":[  
       {  
-        "index":92,
-        "word":"袋",
-        "sound":"dài",
-        "level":"Level 3",
-        "class":"(M)",
-        "explain":"container measure word for things in a bag or a sack"
+        "index":42,
+        "word":"難",
+        "sound":"nán",
+        "level":"Level 1",
+        "class":"(VS)",
+        "explain":"to be difficult"
       },
       {  
-        "index":78,
-        "word":"串",
-        "sound":"chuàn",
-        "level":"Level 3",
-        "class":"(M)",
-        "explain":"collective measure word for something of the same kind or attached closely together"
+        "index":491,
+        "word":"(飛)機場",
+        "sound":"(fēi)jīchǎng",
+        "level":"Level 1",
+        "class":"(N)",
+        "explain":"airport"
       },
       {  
-        "index":36,
-        "word":"表演",
-        "sound":"biǎoyǎn",
-        "level":"Level 3",
-        "class":"(VA)",
-        "explain":"to perform, act, play, demonstrate"
+        "index":236,
+        "word":"每",
+        "sound":"měi",
+        "level":"Level 1",
+        "class":"(Det)",
+        "explain":"every"
       }
     ],
     "incorrectAnsweredWords":[  
       {  
-        "index":255,
-        "word":"建設",
-        "sound":"jiànshè",
-        "level":"Level 3",
-        "class":"(N)",
-        "explain":"construction"
+        "index":307,
+        "word":"最",
+        "sound":"zuì",
+        "level":"Level 1",
+        "class":"(Adv)",
+        "explain":"the most, -est"
       },
       {  
-        "index":228,
-        "word":"回答",
-        "sound":"huídá",
-        "level":"Level 3",
-        "class":"(N)",
-        "explain":"answer, reply"
+        "index":124,
+        "word":"漂亮",
+        "sound":"piāoliàng",
+        "level":"Level 1",
+        "class":"(VS)",
+        "explain":"to be beautiful, to be pretty"
       }
     ]
-  }
+};

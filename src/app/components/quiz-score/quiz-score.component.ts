@@ -21,11 +21,11 @@ export class QuizScoreComponent implements OnInit {
   ngOnInit() {
     // For test
     if( !this.quizService.getQuizResult )
-      this.quizScore = this.mockDataService.getMockQuizScore();
+      this.quizScore = this.mockDataService.getMockQuizScore;
     else
       this.quizScore = this.quizService.getScore;
 
-    console.log( 'this.quizScore', this.quizScore );
+    // console.log( 'this.quizScore', this.quizScore );
   }
 
   /*** Private Method ***/
