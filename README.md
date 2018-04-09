@@ -7,9 +7,9 @@ My Wordbook and Quiz to Memorize words for TOCFL
 ## Core Feature
 
 - Words List: All level (1 - 5 Level)
-- Words List: To Memorize words which you anwered wrong or you did know in Quiz(new words)
+- Words List: To Memorize words which you answered wrong or you did know in Quiz(new words)
 - Quiz: New words(New Words in the list)
-- Quiz: Quiz words which you anwered wrong or you did know in Quiz(new words)
+- Quiz: Quiz words which you answered wrong or you did know in Quiz(new words)
 
 ## Dependencies
 
@@ -18,7 +18,7 @@ My Wordbook and Quiz to Memorize words for TOCFL
 
 ## Development
 
-- Now this is under developing, please refer [Wiki](https://github.com/EdwardBaek/-DailyWordbookTOCFL/wiki) and other pages in this gitgub. Thank you!
+- Now, this is under developing, please refer [Wiki](https://github.com/EdwardBaek/-DailyWordbookTOCFL/wiki) and other pages in this GitHub. Thank you!
 
 
 ## Demo
