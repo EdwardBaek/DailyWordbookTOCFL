@@ -14,10 +14,10 @@ xdescribe('QuizSettingComponent', () => {
   let quizServiceStub: Partial<QuizService>;
   const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
   const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['url']);
-  const quizServiceSpy = jasmine.createSpyObj('QuizService', ['getTest']);
+  const quizServiceSpy = jasmine.createSpyObj('QuizService', ['getOption']);
 
   quizServiceStub = {
-    getTest(text:string): string {
+    getOption(text:string): string {
       return text;
     }
   }
