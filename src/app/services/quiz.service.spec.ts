@@ -100,33 +100,75 @@ describe('QuizService', () => {
         expect(service.resetData).toHaveBeenCalled();
       });
 
-      it('should get diffent Questions on every call', async () => {
+      it('should get different Questions on every call', async () => {
         spyOn(service, 'getNewQuestions').and.callThrough();
         let returnedValue = await service.getNewQuestions();
-        expect(service.getNewQuestions()).not.toEqual(returnedValue);
-        expect(service.getNewQuestions()).not.toEqual(returnedValue);
-        expect(service.getNewQuestions()).not.toEqual(returnedValue);
-        expect(service.getNewQuestions()).not.toEqual(returnedValue);
+        let tempResult; 
+        
+        tempResult = await service.getNewQuestions();
+        expect(tempResult).not.toEqual(returnedValue);
+        
+        tempResult = await service.getNewQuestions();
+        expect(tempResult).not.toEqual(returnedValue);
+
+        tempResult = await service.getNewQuestions();
+        expect(tempResult).not.toEqual(returnedValue);
+
+        tempResult = await service.getNewQuestions();
+        expect(tempResult).not.toEqual(returnedValue);
+        
         expect(service.getNewQuestions).toHaveBeenCalledTimes(5);
         expect(service.getNewQuestions).not.toHaveBeenCalledTimes(10);
       });
+
+      it('should get different answers on every qeustion', async () => {
+        let returnedValue = await service.getNewQuestions();
+        console.log('>>>returnedValue', returnedValue);
+
+        returnedValue.map((question, questionIndex) => {
+          let answerSet = new Set();
+          console.log(questionIndex);
+          question.answers.map( (answer, answerIndex) => {
+            answerSet.add(answer.index);
+          });
+          expect(answerSet.size).toBe(4, `:Q#${questionIndex} answers should have not the same value.`);
+        });
+      });
+
+      it('should include correct answer on every qeustion', async () => {
+        let returnedValue = await service.getNewQuestions();
+        
+        returnedValue.map(question => {
+          expect(question.questionWord).toBeTruthy();
+          let hasCorrectAnswer = question.answers.filter(answer => answer.index === question.questionWord.index);
+          expect(hasCorrectAnswer).toBeTruthy(':answers should have not the same value.');
+        });
+
+      });
+
   
-      it('should have diffent Question Words after call', async () => {
+      it('should have different Question Words after call', async () => {
         spyOn(service, 'getNewQuestions').and.callThrough();
         let returnedValue = await service.getNewQuestions();
         let questionWord = service.getQuestionWords;
-        expect(service.getNewQuestions()).not.toEqual(returnedValue);
+
+        let valueForCompare;
+        valueForCompare = service.getNewQuestions();
+        expect(valueForCompare).not.toEqual(returnedValue);
         expect(questionWord).not.toEqual(service.getQuestionWords);
-        
-        expect(service.getNewQuestions()).not.toEqual(returnedValue);
+
+        valueForCompare = service.getNewQuestions();
+        expect(valueForCompare).not.toEqual(returnedValue);
         expect(questionWord).not.toEqual(service.getQuestionWords);
-        
-        expect(service.getNewQuestions()).not.toEqual(returnedValue);
+
+        valueForCompare = service.getNewQuestions();
+        expect(valueForCompare).not.toEqual(returnedValue);
         expect(questionWord).not.toEqual(service.getQuestionWords);
-        
-        expect(service.getNewQuestions()).not.toEqual(returnedValue);
+
+        valueForCompare = service.getNewQuestions();
+        expect(valueForCompare).not.toEqual(returnedValue);
         expect(questionWord).not.toEqual(service.getQuestionWords);
-        
+
         expect(service.getNewQuestions).toHaveBeenCalledTimes(5);
         expect(service.getNewQuestions).not.toHaveBeenCalledTimes(10);
       });
@@ -149,10 +191,20 @@ describe('QuizService', () => {
       it('should get different Questions on every time', async () => {
         spyOn(service, 'getReQuestions').and.callThrough();
         let returnedValue = await service.getReQuestions();
-        expect(service.getReQuestions()).not.toEqual(returnedValue);
-        expect(service.getReQuestions()).not.toEqual(returnedValue);
-        expect(service.getReQuestions()).not.toEqual(returnedValue);
-        expect(service.getReQuestions()).not.toEqual(returnedValue);
+
+        let valueToCompar;
+        valueToCompar = service.getReQuestions()
+        expect(valueToCompar).not.toEqual(returnedValue);
+
+        valueToCompar = service.getReQuestions()
+        expect(valueToCompar).not.toEqual(returnedValue);
+
+        valueToCompar = service.getReQuestions()
+        expect(valueToCompar).not.toEqual(returnedValue);
+
+        valueToCompar = service.getReQuestions()
+        expect(valueToCompar).not.toEqual(returnedValue);
+
         expect(service.getReQuestions).toHaveBeenCalledTimes(5);
         expect(service.getReQuestions).not.toHaveBeenCalledTimes(10);
       });
@@ -161,16 +213,22 @@ describe('QuizService', () => {
         spyOn(service, 'getReQuestions').and.callThrough();
         let returnedValue = await service.getReQuestions();
         let questionWord = service.getQuestionWords;
-        expect(service.getReQuestions()).not.toEqual(returnedValue);
+        let valueToCompare;
+
+        valueToCompare = service.getReQuestions();
+        expect(valueToCompare).not.toEqual(returnedValue);
         expect(questionWord).toEqual(service.getQuestionWords);
         
-        expect(service.getReQuestions()).not.toEqual(returnedValue);
+        valueToCompare = service.getReQuestions();
+        expect(valueToCompare).not.toEqual(returnedValue);
         expect(questionWord).toEqual(service.getQuestionWords);
-        
-        expect(service.getReQuestions()).not.toEqual(returnedValue);
+
+        valueToCompare = service.getReQuestions();
+        expect(valueToCompare).not.toEqual(returnedValue);
         expect(questionWord).toEqual(service.getQuestionWords);
-        
-        expect(service.getReQuestions()).not.toEqual(returnedValue);
+
+        valueToCompare = service.getReQuestions();
+        expect(valueToCompare).not.toEqual(returnedValue);
         expect(questionWord).toEqual(service.getQuestionWords);
         
         expect(service.getReQuestions).toHaveBeenCalledTimes(5);

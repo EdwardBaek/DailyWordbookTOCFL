@@ -85,24 +85,25 @@ export class QuizService {
 
   /*** Set Method from Util Service ***/ 
   private getCopyArray(originArray) {
+    // Word data is simple array, therefore swallow copy is enough
     return this.utilService.getCopyArray(originArray);
   }
   private getRandomPositiveIntWithZero(max) {
-    return this.utilService.getRandomPositiveIntWithZero(max);
+    return this.utilService.getRandomInt(0, max);
   }
   private hasInputValueInArray(array, value) {
     return this.utilService.hasInputValueInArray(array, value);
   }
 
   /*** Private Method ***/
+  // TODO: think and find testing with jasmine Private Methods
   private async createQuestion():Promise<Question[]> {
     // initial Data
     let wordData = await this.wordDataService.getWordList(this.option.level);
     this.questions = new Array(this.option.number);
     this.questionWords = ( this.questionWords ) ? this.questionWords : this.getRandomWordsData(wordData, this.option.number);
-    let fakeAnswers = this.getRandomIcorrectAnswerData(wordData, this.questionWords);
+    let fakeAnswers = this.getRandomAnswerData(wordData, this.questionWords);
 
-    // TODO: make test code instead of below
     // console.log('wordData', wordData);
     // console.log( 'questions' , this.questions);
     // console.log( 'wordList', this.wordList );
@@ -149,33 +150,33 @@ export class QuizService {
     return wordArray;
   }
 
-  private getRandomIcorrectAnswerData(wordDataRaw: any[], answer: any[]) :Word[] {
-    const answerNum = 3;
-    // Copy array value
-    let wordData = this.getCopyArray(wordDataRaw);
-    // console.log('getRandomIcorrectAnswerData start-length:', wordData.length);
-    let answerArray = [];
-    let tempWord;
-    answer.forEach( (cur, inx) => {
-      let tempWordData = wordData;
-      let tempIndex;
-      let tempArray:Word[] = [];
-      for(var i=0; i < answerNum; i++) {
-        do {
-          tempIndex = this.getRandomPositiveIntWithZero(wordData.length);
-          tempWord = wordData[tempIndex];
-        }while(tempWord == cur && this.hasInputValueInArray(tempArray, tempWord) )
-        tempArray.push(tempWord);
-        tempWordData.splice(tempIndex, 1);
-      }
-      // tempArray.splice( this.getRandomInteger(answerNum+1), 0, cur);
-      answerArray.push(tempArray);
-      tempWordData = [];
-      tempIndex = '';
+  private getRandomAnswerData(wordDataRaw: any[], answer: any[]) :any[] {
+    const inccorectAnswerNum = 3;
+    let returnArray = answer.map( answer => {
+      let wordData = this.getCopyArray(wordDataRaw);
+      //XXX: exception if wordData length is under inccorectAnswerNum
+      //      after adding my word list feature, above situation could be happened.
+
+      let incorrectAnswerArray = new Array(inccorectAnswerNum).fill(undefined);
+
+      return incorrectAnswerArray.map( () => {
+        let tempIndex;
+        let incorrectAnswer;
+        let tries = 0;
+        do{
+          tempIndex = Math.floor(Math.random()*wordData.length);
+          incorrectAnswer = wordData[tempIndex];
+          tries ++;
+        } while( tries < 100 && (
+              answer === incorrectAnswer || 
+              incorrectAnswerArray.findIndex( answer => answer === incorrectAnswer) !== -1
+            ) )
+        wordData.splice(tempIndex, 1);
+        return incorrectAnswer;
+      })
     });
-    
-    // console.log('getRandomIcorrectAnswerData end-length:', wordData.length);
-    return answerArray;
+
+    return returnArray;
   }
 
   private createScore() {
@@ -183,7 +184,7 @@ export class QuizService {
     let correctArray: any[] = [];
     let incorrectArray: any[] = [];
 
-    console.log( this.quizResult);
+    // console.log( this.quizResult);
     this.quizResult.forEach( (cur, inx) => {
       if ( cur.isAnswerCorrect != undefined ){
         if( cur.isAnswerCorrect ){

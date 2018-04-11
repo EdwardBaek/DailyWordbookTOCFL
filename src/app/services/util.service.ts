@@ -72,7 +72,7 @@ export class UtilService {
 
   hasInputValueInArray(array: any[], value) :boolean {
     array.forEach( (cur, inx) => {
-      if( cur == value ) return true;
+      if( cur === value ) return true;
     });
     return false;
   }
