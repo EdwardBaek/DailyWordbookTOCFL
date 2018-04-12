@@ -43,3 +43,7 @@ Title examples of good commit messages:
 * Reformat = A change that MUST be just formatting, e.g. omit whitespace.
 * Optimize = A change that MUST be just about performance, e.g. speed up code.
 * Document = A change that MUST be only in the documentation, e.g. help files.
+
+> [Commit Verbs 101: why I like to use this and why you should also like it. - Daniel Torres](https://medium.com/@danielfeelfine/commit-verbs-101-why-i-like-to-use-this-and-why-you-should-also-like-it-d3ed2689ef70)
+
+> [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
