@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Word } from '../models/Word';
 import { Question } from '../models/Question';
+import { Score } from '../models/Score';
+import { Option } from '../models/Option';
 import { WordDataService } from '../services/word-data.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { UtilService } from './util.service';
 
 @Injectable()
 export class QuizService {
-  private option: any;
+  private option: Option
   private questions: Question[];
   private questionWords: Word[];
   private quizResult: Question[];
-  private scoreData: any;
+  private scoreData: Score;
 
   constructor(
     private wordDataService: WordDataService,
@@ -32,7 +34,7 @@ export class QuizService {
   /*** Method ***/  
   init() {
     this.scoreData = {
-      socre: 0,
+      score: 0,
       totalWords:  5,
       level: 1,
       date: new Date(),
