@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LEVEL } from '../models/Types';
-import { Word } from '../models/Word';
+import { Word, LEVEL } from '../models';
 import { 
   MOCK_WORD_DATA_LEVEL_1, 
   MOCK_WORD_DATA_LEVEL_2, 

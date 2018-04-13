@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Word } from '../models/Word';
-import { Question } from '../models/Question';
-import { Score } from '../models/Score';
-import { Option } from '../models/Option';
+import { Word, Question, Score, Option } from '../models';
 import { WordDataService } from '../services/word-data.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { UtilService } from './util.service';

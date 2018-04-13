@@ -1,5 +1,4 @@
-import { Word } from "../models/Word";
-import { LEVEL } from '../models/Types';
+import { Word, LEVEL } from "../models";
 
 export const MOCK_SAMPLE_WORD_DATA: any[] = [
 {
