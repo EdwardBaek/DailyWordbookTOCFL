@@ -3,11 +3,9 @@ import { HttpClientTestingModule, HttpTestingController } from'@angular/common/h
 import { WordDataService } from './word-data.service';
 
 import { Word } from '../models/Word';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
-import { of } from 'rxjs/observable/of';  
-import { async } from 'q';
 import { UtilService } from './util.service';
 
 import { MockWordDataService } from './testing/mock.word-data.service';
@@ -44,10 +42,8 @@ describe('WordDataService', () => {
 
   it('can test HttpClient.get', () => {
     const expectedData: Data = {name: 'Test Data'};
-    // const testUrl: string = "https://dailywordbook.firebaseapp.com/assets/data/level1.json";
-    const testUrl: string = "https://jsonplaceholder.typicode.com/posts";
-    
-    // const testUrl: string = service.getTestUrl(1);
+    const testUrl: string = "https://dailywordbook.firebaseapp.com/assets/data/level1.json";
+    // const testUrl: string = "https://jsonplaceholder.typicode.com/posts";
     
     // Make an HTTP GET request
     httpClient.get<Data>(testUrl)
@@ -79,7 +75,7 @@ describe('WordDataService', () => {
   
 });
 
-describe('MockWordDataService', () => {
+xdescribe('MockWordDataService', () => {
   let service: MockWordDataService;
   let mockDataService: MockDataService = new MockDataService();
 

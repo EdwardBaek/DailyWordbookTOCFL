@@ -31,7 +31,6 @@ export class QuizCardComponent implements OnInit {
     else 
       this.isSelectedAnswerCorrect = false;
 
-    console.log('onClickAnswer : ', this.selectedWordIndex, this.isSelectedAnswerCorrect );
   }
   ngOnChanges(changes: SimpleChanges) {
   }

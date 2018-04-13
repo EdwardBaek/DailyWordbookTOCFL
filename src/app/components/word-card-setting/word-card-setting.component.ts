@@ -62,14 +62,11 @@ export class WordCardSettingComponent implements OnInit {
   }
 
   private setLevel(level) {
-    console.log('setLevel', level);
     this.selectedLevel = level;
     this.sampleWord = this.mockDataService.getMocSamplekWordDataByLevel(level);
-    console.log('this.sampleWord', this.sampleWord);
     this.settingService.setLevel(level);
   }
   private setWordCardType(wordCardType) {
-    console.log('setWordCardType', wordCardType);
     this.selectedWordCardType = wordCardType;
     this.settingService.setWordCardType(wordCardType);
   }

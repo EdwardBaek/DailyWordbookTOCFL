@@ -46,6 +46,5 @@ export class WordCardComponent implements OnInit {
   onCardClick() {
     this.cardClickState = (this.cardClickState == 'clicked') ? 'unclicked' : 'clicked';
     this.flipped = ( this.cardClickState == 'clicked' ) ? true : false
-    console.log('this.cardClickState',this.cardClickState);
   }
 }

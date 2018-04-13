@@ -36,7 +36,6 @@ export class QuizQuestionComponent implements OnInit {
     private quizService: QuizService
   ) { 
     this.activatedRoute.parent.params.subscribe(params => {
-      console.log('params', params);
       if( params.type == 're' )
         this.isReQuiz = true;
     });
@@ -48,7 +47,6 @@ export class QuizQuestionComponent implements OnInit {
     } else {
       await this.loadQuiz();
     }
-    console.log('this.questions', this.questions);
   }
 
   /*** Method ***/

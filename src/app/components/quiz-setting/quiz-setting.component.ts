@@ -27,7 +27,6 @@ export class QuizSettingComponent implements OnInit {
   ) {
     this.LEVELS = LEVELS;
     this.QUESTION_COUNT = QUESTION_COUNT;
-    console.log(this.selectedLevel);
   }
 
   ngOnInit() {

@@ -19,13 +19,11 @@ export class QuizScoreComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // For test
+    // If there is no data, display MockData
     if( !this.quizService.getQuizResult )
       this.quizScore = this.mockDataService.getMockQuizScore;
     else
       this.quizScore = this.quizService.getScore;
-
-    // console.log( 'this.quizScore', this.quizScore );
   }
 
   /*** Private Method ***/

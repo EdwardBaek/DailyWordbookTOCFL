@@ -65,7 +65,6 @@ export class WordListComponent implements OnInit {
   ) { }
 
   async ngOnInit(){
-    // console.debug('ngOninit-isLoadedData:', this.isLoadedData);
     this.selectedLevel = this.settingService.getLevel();
     this.selectedWordCardType = this.settingService.getWordCardType();
     await this.loadWordData(this.selectedLevel);

@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Word } from '../models/Word';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import { of } from 'rxjs/observable/of';  
 import { UtilService } from './util.service';
-
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
 
 @Injectable()
 export class WordDataService {
@@ -32,22 +28,16 @@ export class WordDataService {
     let wordList = this.getWordDataByLevel(level);
     this.selectedLevel = level;
     
-    console.log('>>>try load data from memory');
     if(wordList && wordList.length > 0) {
-      console.log('>>>Data from memory', wordList);
       return this.getCopyArray(wordList);
     }
 
     wordList = this.getWordDataFromLocalStorage(level);
     if(wordList && wordList.length > 0) {
-      console.log('>>>Data from localStorage', wordList);
       return this.getCopyArray(wordList);
     }
     
     let responsedData = await this.getWordDataFromNetwork(level);
-    // For Test
-    // let responsedData = await this.getWordDataFromNetworkSlowly(level);
-    console.log('>>>Data Level -' + level, responsedData.data);
     
     this.setWordDataByLevel(level, responsedData.data);
     this.setWordDataToLocalStorage(level, responsedData.data);
@@ -58,7 +48,6 @@ export class WordDataService {
   /*** Set Method from Util Service ***/
   private getCopyArray(originArray): any[] {
     return this.utilService.getCopyArray(originArray);
-    // return originArray.slice();
   }
 
   /*** Private Method ***/
@@ -85,13 +74,6 @@ export class WordDataService {
     } catch (error) {
       await this.handleError(error);
     }
-  }
-
-  getTestValue(param: any): any{
-    return param;
-  }
-  getTestHttp<T>(level: number) {
-    return this.http.get<T>(this.getWordListDataUrlByLevel(level));
   }
   
   // For delay test

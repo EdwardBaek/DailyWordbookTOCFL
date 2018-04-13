@@ -23,12 +23,10 @@ export class SettingService {
   }
   getLevel() :number {
     this.loadSettingFromLocalStorage();
-    console.log('getLevel',this.setting);
     return this.setting.level;
   }
   getWordCardType(): number {
     this.loadSettingFromLocalStorage();
-    console.log('getLevel',this.setting);
     return this.setting.wordCardType;
   }
 
@@ -47,7 +45,6 @@ export class SettingService {
   
   private loadSettingFromLocalStorage() {
     const setting = JSON.parse(localStorage.getItem(this.localStorageName)); 
-    console.log('loadSettingFromLocalStorage :', setting, !setting && setting != null);
     if( !setting && setting != null )
       this.setting = setting; 
   }

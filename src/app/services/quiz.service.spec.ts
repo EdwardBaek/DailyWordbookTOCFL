@@ -1,12 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing';
+
 import { WordDataService } from './word-data.service';
 import { QuizService } from './quiz.service';
-import { HttpClient } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UtilService } from './util.service';
+
 import { MockWordDataService } from './testing/mock.word-data.service';
 import { MockDataService } from './mock-data.service';
-import { Question } from '../models/Question';
 
 describe('QuizService', () => {
   let mockDataService: MockDataService = new MockDataService();

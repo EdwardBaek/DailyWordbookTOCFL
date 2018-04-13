@@ -97,22 +97,12 @@ export class QuizService {
   /*** Private Method ***/
   // TODO: think and find testing with jasmine Private Methods
   private async createQuestion():Promise<Question[]> {
-    // initial Data
     let wordData = await this.wordDataService.getWordList(this.option.level);
     this.questions = new Array(this.option.number);
     this.questionWords = ( this.questionWords ) ? this.questionWords : this.getRandomWordsData(wordData, this.option.number);
     let fakeAnswers = this.getRandomAnswerData(wordData, this.questionWords);
 
-    // console.log('wordData', wordData);
-    // console.log( 'questions' , this.questions);
-    // console.log( 'wordList', this.wordList );
-    // console.log( 'fakeAnswers', fakeAnswers );
-    // console.log( 'questions.length' , this.questions.length);
-    
-    // let returnResult = this.getCopyArray(this.questions);
-
     for( var i=0; i < this.questions.length; i++) {
-      // console.log('questions', i+1);
       let answers = this.getCopyArray( fakeAnswers[i] );
       answers.splice( this.getRandomPositiveIntWithZero(answers.length), 0, this.questionWords[i]);
       let question: Question = {
@@ -122,30 +112,21 @@ export class QuizService {
         selectedWordIndex: undefined,
         isAnswerCorrect: undefined
       }
-      // console.log( 'questions'+i, question );
       this.questions[i] = question;
     }
 
-    // console.log( 'questions', this.questions );
-    // let returnResult = this.questions.slice();
-    // console.log('returnResult', returnResult);
-    // console.log('this.questions', this.questions);
     return this.getCopyArray(this.questions);
   }
 
   private getRandomWordsData(wordDataRaw: any[], number: number): any[] {
     let wordData = this.getCopyArray(wordDataRaw);
-    // Copy array value
-    // console.log('getRandomWordsData start-length:', wordData.length);
     let wordArray = [];
     let tempIndex = 0;
     for(var i=0; i < number; i++) {
-      // tempIndex = this.getRandomInteger(wordData.length);
       tempIndex = this.getRandomPositiveIntWithZero(wordData.length);
       wordArray[i] = wordData[tempIndex];
       wordData.splice(tempIndex, 1);
     }
-    // console.log('getRandomWordsData end-length:', wordData.length);
     return wordArray;
   }
 
@@ -183,7 +164,6 @@ export class QuizService {
     let correctArray: any[] = [];
     let incorrectArray: any[] = [];
 
-    // console.log( this.quizResult);
     this.quizResult.forEach( (cur, inx) => {
       if ( cur.isAnswerCorrect != undefined ){
         if( cur.isAnswerCorrect ){
