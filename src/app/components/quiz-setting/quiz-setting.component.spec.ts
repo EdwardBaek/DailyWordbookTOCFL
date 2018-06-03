@@ -16,11 +16,11 @@ xdescribe('QuizSettingComponent', () => {
   const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['url']);
   const quizServiceSpy = jasmine.createSpyObj('QuizService', ['getOption']);
 
-  quizServiceStub = {
-    getOption(text:string): string {
-      return text;
-    }
-  }
+  // quizServiceStub = {
+  //   getOption(text:string): string {
+  //     return text;
+  //   }
+  // }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
