@@ -38,10 +38,12 @@ export class QuizService {
       correctAnsweredWords : [],
       incorrectAnsweredWords : []
     };
-    this.option = {
-      level: 1,
-      number: 5
-    };
+    if( !this.option ) {
+      this.option = {
+        level: 1,
+        number: 5
+      };
+    }
   }
   resetData() {
     this.questions = undefined;
