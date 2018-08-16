@@ -32,6 +32,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 // For Animation
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QuizQuestionCounterComponent } from './components/quiz-question-counter/quiz-question-counter.component';
+import { TimerService } from './services/timer.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     QuizQuestionComponent,
     WordCardComponent,
     WordCardSettingComponent,
-    QuizCardComponent
+    QuizCardComponent,
+    QuizQuestionCounterComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule
   ],
-  providers: [WordDataService, QuizService, SettingService, MockDataService, UtilService],
+  providers: [WordDataService, QuizService, SettingService, MockDataService, UtilService, TimerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,9 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Word } from '../../models/Word';
 import { Question } from '../../models/Question';
 import { QuizService } from '../../services/quiz.service';
+import { TimerService } from '../../services/timer.service';
 import { QuizCardComponent } from '../quiz-card/quiz-card.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { QuizScoreComponent } from '../quiz-score/quiz-score.component';
+import { QuizQuestionCounterComponent } from '../quiz-question-counter/quiz-question-counter.component';
 
 @Component({
   selector: 'app-quiz-question',
@@ -29,16 +31,23 @@ export class QuizQuestionComponent implements OnInit {
   isChangeCardOn: boolean = false;
 
   @ViewChild(QuizCardComponent) quizCardComponent : QuizCardComponent;
+  @ViewChild(QuizQuestionCounterComponent) quizQuestionCounterComponent : QuizQuestionCounterComponent;
+
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private quizService: QuizService
+    private quizService: QuizService,
+    private timerService: TimerService
   ) { 
     this.activatedRoute.parent.params.subscribe(params => {
       if( params.type == 're' )
         this.isReQuiz = true;
     });
+    this.timerService.countDoneAnnounce$.subscribe(done => {
+      this.next();
+    }
+    );
   }
 
   async ngOnInit(){
@@ -47,6 +56,12 @@ export class QuizQuestionComponent implements OnInit {
     } else {
       await this.loadQuiz();
     }
+  }
+
+  ngAfterViewInit() {
+    setTimeout( () => {
+      this.timerService.start();
+    }, 0);
   }
 
   /*** Method ***/
@@ -62,13 +77,25 @@ export class QuizQuestionComponent implements OnInit {
   
   /*** UI Method ***/
   onClickNext() {
-    this.changeQuestionCard(()=>{
-      this.selectedQuestion = this.questions[++this.selectedQuestionIndex];
-    });
+    this.next();  
   }
-  onClickScore() {
+
+  next() {
+    if( this.selectedQuestionIndex + 1 < this.questions.length ) {
+      this.changeQuestionCard(()=>{
+        this.selectedQuestion = this.questions[++this.selectedQuestionIndex];
+        this.timerService.start();
+      });
+    } else {
+      this.moveToScorePage();
+      
+    }
+  }
+
+  moveToScorePage() {
     this.changeQuestionCard(()=>{
       this.quizService.setQuizResult = this.questions;
+      this.timerService.reset();
       this.router.navigate(['../score'], { relativeTo: this.activatedRoute});
     });
   }

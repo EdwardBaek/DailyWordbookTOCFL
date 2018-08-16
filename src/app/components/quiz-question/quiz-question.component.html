@@ -1,4 +1,8 @@
 <div *ngIf="selectedQuestion">
+
+  <!-- Start Quiz Counter -->
+  <app-quiz-question-counter></app-quiz-question-counter>
+  <!-- End Quiz Counter -->
   <!-- Start Quiz Result List -->
   <div class="text-center">
     <div *ngFor="let question of questions" class="float-left mx-1">
@@ -31,7 +35,7 @@
   <!-- Start Control Buttons -->
   <div>
     <button class="btn btn-primary btn-block" (click)="onClickNext()" [disabled]=" ( questions.length == selectedQuestionIndex +1) || ( isChangeCardOn )">Next</button>
-    <button class="btn btn-primary btn-block" *ngIf="questions.length == selectedQuestionIndex +1" (click)="onClickScore()" [disabled]=" isChangeCardOn " >Score</button>
+    <button class="btn btn-primary btn-block" *ngIf="questions.length == selectedQuestionIndex +1" (click)="onClickNext()" [disabled]=" isChangeCardOn " >Score</button>
   </div>
   <!-- End Control Buttons -->
 </div>
