@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Word } from '../models/Word';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/toPromise';
-import { of } from 'rxjs/observable/of';  
+import { Observable ,  of } from 'rxjs';  
 import { UtilService } from './util.service';
 
 @Injectable()
